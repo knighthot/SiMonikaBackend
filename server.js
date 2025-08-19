@@ -1,7 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
-import { ingestDocs, searchDocs } from "./src/utils/rag.js";
+import { ingestDocs, searchDocs } from "./src/utils/rag.shared.js";
 import OpenAI from "openai";
 
 dotenv.config();
@@ -60,5 +60,5 @@ app.post("/ask", async (req, res) => {
 });
 
 app.listen(3000, () => {
-  console.log("🚀 Server jalan di http://localhost:3000");
+  console.log("🚀 Server jalan di http://localhost:30001");
 });

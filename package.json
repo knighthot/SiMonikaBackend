@@ -2,9 +2,13 @@
   "name": "backendsimonika",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "src/server.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "test:db": "node test-mysql.js",
+    "start": "nodemon server.js",
+     "dev": "nodemon src/server.js",
+    "seed:admin": "node src/scripts/seed-admin.js",
+     "rag:rebuild-shared": "node src/scripts/rag-rebuild-shared.js"
   },
   "keywords": [],
   "author": "",
@@ -13,14 +17,18 @@
   "dependencies": {
     "bcryptjs": "^3.0.2",
     "chromadb": "^3.0.11",
+    "cors": "^2.8.5",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "express-async-handler": "^1.2.0",
     "jsonwebtoken": "^9.0.2",
     "mammoth": "^1.10.0",
+    "morgan": "^1.10.1",
     "mysql2": "^3.14.3",
     "openai": "^5.12.2",
-    "pdf-parse": "^1.1.1"
+    "pdf-parse": "^1.1.1",
+    "sequelize": "^6.37.7",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"
