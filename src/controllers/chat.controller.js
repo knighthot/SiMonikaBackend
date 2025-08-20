@@ -1,6 +1,7 @@
 import OpenAI from "openai";
 import { TB_ChatSession, TB_ChatMessage } from "../models/index.js";
 import { searchShared } from "../utils/rag.shared.js";
+import { Op } from "sequelize"
 
 // util: ambil OpenAI API key dari header (BYOK) atau fallback ENV
 function getServerOpenAIKey() {
@@ -61,7 +62,7 @@ async function loadHistory(sessionId, userId, limit = 30) {
 export const sendMessage = async (req, res, next) => {
   try {
     const { id: sessionId } = req.params;
-    const { prompt, model = "gpt-4o-mini" } = req.body || {};
+    const { prompt, model = "gpt-3.5-turbo-0125" } = req.body || {};
     if (!prompt) return res.status(400).json({ message: "prompt is required" });
 
     // pastikan session milik user
@@ -177,4 +178,54 @@ export const streamMessage = async (req, res, next) => {
     try { res.write(`event: error\ndata: ${JSON.stringify({ message: e.message })}\n\n`); } catch {}
     next(e);
   }
+};
+
+// GET /api/chat/sessions/:id/messages?limit=50&before=2025-01-01T00:00:00.000Z&order=ASC
+export const getMessages = async (req, res, next) => {
+  try {
+    const sessionId = req.params.id;
+    const limit = Math.min(parseInt(req.query.limit || "50", 10), 200);
+    const order = String(req.query.order || "ASC").toUpperCase() === "DESC" ? "DESC" : "ASC";
+    const before = req.query.before ? new Date(String(req.query.before)) : null;
+
+    // pastikan sesi milik user
+    const sess = await TB_ChatSession.findOne({
+      where: { ID_ChatSession: sessionId, ID_User: req.user.id }
+    });
+    if (!sess) return res.status(404).json({ message: "Session not found" });
+
+    const where = { ID_ChatSession: sessionId };
+    if (before) where.createdAt = { [Op.lt]: before };
+
+    const rows = await TB_ChatMessage.findAll({
+      where,
+      order: [["createdAt", order]],
+      limit
+    });
+
+    // kirim format yang ringan untuk FE
+    res.json(rows.map(r => ({
+      id: r.ID_Message,
+      role: r.Role,
+      content: r.Content,
+      createdAt: r.createdAt
+    })));
+  } catch (e) { next(e); }
+};
+
+// DELETE /api/chat/sessions/:id
+export const deleteSession = async (req, res, next) => {
+  try {
+    const sessionId = req.params.id;
+    // pastikan milik user
+    const sess = await TB_ChatSession.findOne({
+      where: { ID_ChatSession: sessionId, ID_User: req.user.id }
+    });
+    if (!sess) return res.status(404).json({ message: "Session not found" });
+
+    // hapus pesan dulu baru sesi
+    await TB_ChatMessage.destroy({ where: { ID_ChatSession: sessionId } });
+    await TB_ChatSession.destroy({ where: { ID_ChatSession: sessionId } });
+    res.status(204).end();
+  } catch (e) { next(e); }
 };
