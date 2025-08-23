@@ -16,8 +16,8 @@ async function main() {
 
   // buat tambak default
   const tambak = await TB_Tambak.create({
-    Nama: process.env.ADMIN_TAMBAK || "Tambak Utama",
-    Substrat: "Tanah",
+    Nama: process.env.ADMIN_TAMBAK || "Admin",
+    Substrat: "-",
   });
 
   // buat admin (password di-hash oleh hook model)
@@ -28,9 +28,7 @@ async function main() {
     ID_Tambak: tambak.ID_Tambak
   });
 
-  console.log("✅ Admin created:");
-  console.log("  Username:", admin.Nama_tambak);
-  console.log("  TambakID:", tambak.ID_Tambak);
+
   process.exit(0);
 }
 

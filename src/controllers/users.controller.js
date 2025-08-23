@@ -1,5 +1,7 @@
+// users.controller.js
 import { TB_User, TB_Tambak } from "../models/index.js";
 import { buildPaging, wrapPaging } from "../utils/pagination.js";
+import { Op } from "sequelize";
 
 export const list = async (req, res, next) => {
   try {
@@ -26,6 +28,11 @@ export const getById = async (req, res, next) => {
 
 export const create = async (req, res, next) => {
   try {
+    const { ID_Tambak } = req.body;
+    if (ID_Tambak) {
+      const exists = await TB_User.findOne({ where: { ID_Tambak } });
+      if (exists) return res.status(409).json({ message: "Tambak ini sudah memiliki user" });
+    }
     const data = await TB_User.create(req.body);
     res.status(201).json({ id: data.ID_User });
   } catch (e) { next(e); }
@@ -35,6 +42,13 @@ export const update = async (req, res, next) => {
   try {
     const data = await TB_User.findByPk(req.params.id);
     if (!data) return res.status(404).json({ message: "Not found" });
+    const { ID_Tambak } = req.body || {};
+    if (ID_Tambak) {
+      const exists = await TB_User.findOne({
+        where: { ID_Tambak, ID_User: { [Op.ne]: req.params.id } }
+      });
+      if (exists) return res.status(409).json({ message: "Tambak ini sudah memiliki user" });
+    }
     await data.update(req.body);
     res.json({ ok: true });
   } catch (e) { next(e); }

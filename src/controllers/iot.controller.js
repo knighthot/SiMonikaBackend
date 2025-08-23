@@ -1,6 +1,21 @@
 import { TB_Perangkat, TB_Tambak } from "../models/index.js";
 import { startSim, getLast } from "../services/iot.simulator.js";
 
+export const ingest = async (req, res, next) => {
+  try {
+    const { deviceId, payload } = req.body;  // deviceId == ID_PerangkatIot
+    // ... simpan payload ke tabel log IoT kamu ...
+
+    // update last seen
+    await TB_Perangkat.update(
+      { LastSeenAt: new Date() },
+      { where: { ID_PerangkatIot: deviceId } }
+    );
+
+    res.json({ ok: true });
+  } catch (e) { next(e); }
+};
+
 /** FE submit ID_PerangkatIot (+ optional ID_Tambak) */
 export const registerIot = async (req, res, next) => {
   try {

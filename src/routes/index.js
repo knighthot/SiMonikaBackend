@@ -20,5 +20,6 @@ api.use("/tambak", tambak);
 api.use("/history", history);
 api.use("/history-peramalan", historyPeramalan);
 api.use("/chat", chat);
-api.use("/iot", iot , iotMe);
+ api.use("/iot", iot);     // r.get('/', '/:id', '/list', dst
+ api.use("/iot", iotMe); 
 export default api;

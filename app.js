@@ -9,6 +9,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
+app.use(express.urlencoded({ extended: true }));
 
 // Health check duluan
 app.get("/", (_req, res) => {
