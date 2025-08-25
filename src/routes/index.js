@@ -8,7 +8,8 @@ import historyPeramalan from "./historyPeramalan.routes.js";
 import chat from "./chat.routes.js";
 import iot from "./iot.routes.js";
 import iotMe from "./iot.me.routes.js";
-
+import aiRoutes from "./ai.routes.js";
+import peramalan from "./peramalan.routes.js";
 const api = Router();
 
 
@@ -22,4 +23,6 @@ api.use("/history-peramalan", historyPeramalan);
 api.use("/chat", chat);
  api.use("/iot", iot);     // r.get('/', '/:id', '/list', dst
  api.use("/iot", iotMe); 
+ api.use("/ai", aiRoutes);
+ api.use("/peramalan", peramalan);
 export default api;

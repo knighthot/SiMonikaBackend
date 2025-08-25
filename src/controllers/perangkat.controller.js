@@ -7,20 +7,22 @@ const ACTIVE_WINDOW_MS = 10_000;
 export const list = async (req, res, next) => {
   try {
     const { page, limit, offset } = buildPaging(req.query);
+    const { id_tambak } = req.query;
+
+    const include = [{
+      model: TB_Tambak,
+      attributes: ["ID_Tambak", "Nama", "Latitude", "Longitude"],
+      ...(id_tambak ? { where: { ID_Tambak: id_tambak } } : {})
+    }];
 
     const result = await TB_Perangkat.findAndCountAll({
-      offset, limit,
-      order: [["createdAt", "DESC"]],
-      include: [{
-        model: TB_Tambak,
-        attributes: ["ID_Tambak", "Nama", "Latitude", "Longitude"]
-      }]
+      offset, limit, order: [["createdAt", "DESC"]], include
     });
 
     const rows = result.rows.map(r => {
       const j = r.toJSON();
       const last = j.LastSeenAt ? new Date(j.LastSeenAt).getTime() : 0;
-      const alive = last && (Date.now() - last < THRESHOLD_MIN);
+      const alive = last && (Date.now() - last < ACTIVE_WINDOW_MS); // NB: ACTIVE_WINDOW_MS yang bener (10 detik)
 
       const t0 = Array.isArray(j.TB_Tambaks) && j.TB_Tambaks.length ? j.TB_Tambaks[0] : null;
 
@@ -36,6 +38,7 @@ export const list = async (req, res, next) => {
     res.json(wrapPaging({ count: result.count, rows }, page, limit));
   } catch (e) { next(e); }
 };
+
 
 export const getById = async (req, res, next) => {
   try {
