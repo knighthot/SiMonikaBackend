@@ -6,7 +6,7 @@ import { TB_History } from "./HistoryModel.js";
 import { TB_HistoryPeramalan } from "./HistoryPeramalanModel.js";
 import { TB_ChatSession } from "./chatSession.model.js";
 import { TB_ChatMessage } from "./chatMessage.model.js";
-
+import { TB_AutoForecast } from "./AutoForecast.js";
 // User 1..* Session
 TB_User.hasMany(TB_ChatSession, { foreignKey: "ID_User" });
 TB_ChatSession.belongsTo(TB_User, { foreignKey: "ID_User" });
@@ -32,10 +32,14 @@ TB_History.belongsTo(TB_Tambak, { foreignKey: "ID_Tambak" });
 TB_Tambak.hasMany(TB_HistoryPeramalan, { foreignKey: "ID_Tambak" });
 TB_HistoryPeramalan.belongsTo(TB_Tambak, { foreignKey: "ID_Tambak" });
 
+// Relasi Tambak <-> AutoForecast
+TB_Tambak.hasMany(TB_AutoForecast, { foreignKey: "ID_Tambak" });
+TB_AutoForecast.belongsTo(TB_Tambak, { foreignKey: "ID_Tambak" });
+
 export async function syncDB() {
   await sequelize.sync({ alter: true }); // AUTO CREATE / ALTER TABLE
 }
 
 export {
-  TB_User, TB_Perangkat, TB_Tambak, TB_History, TB_HistoryPeramalan, TB_ChatSession, TB_ChatMessage 
+  TB_User, TB_Perangkat, TB_Tambak, TB_History, TB_HistoryPeramalan, TB_ChatSession, TB_ChatMessage , TB_AutoForecast
 };

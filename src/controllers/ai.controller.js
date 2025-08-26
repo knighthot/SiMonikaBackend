@@ -1,13 +1,11 @@
+// ai.controller.js
+import dayjs from "dayjs";
 import OpenAI from "openai";
+import { TB_HistoryPeramalan } from "../models/index.js";
 
-function getServerOpenAIKey() {
-  const k = process.env.OPEN_AI_KEY;
-  if (!k) {
-    const err = new Error("OPEN_AI_KEY is not set on server");
-    err.status = 500;
-    throw err;
-  }
-  return k;
+/** <- aman: tidak throw kalau key kosong */
+function getMaybeKey() {
+  return process.env.OPEN_AI_KEY || process.env.OPENAI_API_KEY || null;
 }
 
 const SAFE_RANGE = {
@@ -17,46 +15,73 @@ const SAFE_RANGE = {
   turb: { max: 200 }
 };
 
-const WQI_THRESH = { good: 80, fair: 60 };
-
-// helper angka
 const num = (v) => {
   const n = Number(v);
   return Number.isFinite(n) ? n : null;
 };
+function normForecastRow(p) {
+  // dukung format dari dummy forecast: {Suhu:{p50,...}, PH:{...}, Salinitas:{...}, Kekeruhan:{...}, risk_label}
+  const P = p?.Parameter ?? p ?? {};
+  const asNum = (v) => {
+    if (v && typeof v === "object") return num(v.p50);
+    return num(v);
+  };
+  const PHx = P?.PH ?? P?.pH ?? P?.ph;
+  return {
+    ts: p?.ts || P?.ts || P?.Timestamp || P?.time || null,
+    Suhu:      asNum(P?.Suhu ?? P?.suhu),
+    PH:        num(PHx && typeof PHx === "object" ? PHx.p50 : PHx),
+    Salinitas: asNum(P?.Salinitas ?? P?.salinitas),
+    Kekeruhan: asNum(P?.Kekeruhan ?? P?.kekeruhan),
+    risk_label: p?.risk_label ?? P?.risk_label ?? null,
+  };
+}
 
-// ambil WQI dari berbagai kemungkinan field
-const extractWqi = (p) => {
-  const src = p?.Parameter ?? p ?? {};
-  // kandidat umum
-  for (const k of ["WQI","wqi","Wqi","wqi_value","WQI_value"]) {
-    const v = num(src?.[k]);
-    if (v !== null) return v;
+function stats(arr) {
+  const xs = arr.filter((v) => Number.isFinite(v));
+  if (!xs.length) return { count: 0, min: null, max: null, mean: null };
+  const s = xs.reduce((a, b) => a + b, 0);
+  return { count: xs.length, min: Math.min(...xs), max: Math.max(...xs), mean: +(s/xs.length).toFixed(2) };
+}
+
+// Ambil input efektif: (tetap)
+async function resolveInputs({ sensor, forecast, ID_Tambak }) {
+  if ((sensor && Object.keys(sensor).length) || (forecast && forecast.length)) {
+    const sensorNow = {
+      Suhu: num(sensor?.Suhu ?? sensor?.suhu) ?? 0,
+      PH: num(sensor?.PH ?? sensor?.pH ?? sensor?.ph) ?? 0,
+      Salinitas: num(sensor?.Salinitas ?? sensor?.salinitas) ?? 0,
+      Kekeruhan: num(sensor?.Kekeruhan ?? sensor?.kekeruhan) ?? 0,
+    };
+    return { sensorNow, sensorAt: null, forecast: forecast || [], source: "body" };
   }
-  // nested: { Index: { WQI } }
-  const idx = src?.Index ?? src?.index;
-  const v2 = num(idx?.WQI ?? idx?.wqi);
-  return v2 ?? NaN;
-};
 
-const wqiToStatusText = (wqi) =>
-  wqi >= WQI_THRESH.good ? "Baik" : wqi >= WQI_THRESH.fair ? "Waspada" : "Buruk";
+  if (!ID_Tambak) {
+    throw Object.assign(new Error("ID_Tambak is required when sensor/forecast not provided"), { status: 400 });
+  }
 
-function statusFromPoint({ Suhu, PH, Salinitas, Kekeruhan }) {
-  const bad =
-    (Suhu < SAFE_RANGE.suhu.min || Suhu > SAFE_RANGE.suhu.max) ||
-    (PH < SAFE_RANGE.ph.min   || PH   > SAFE_RANGE.ph.max)   ||
-    (Salinitas < SAFE_RANGE.sal.min || Salinitas > SAFE_RANGE.sal.max) ||
-    (Kekeruhan > SAFE_RANGE.turb.max);
-  const warn =
-    (Suhu >= 26 && Suhu < 28) || (Suhu > 32 && Suhu <= 34) ||
-    (PH >= 7 && PH < 7.5) || (PH > 8.5 && PH <= 9) ||
-    (Salinitas >= 10 && Salinitas < 15) || (Salinitas > 25 && Salinitas <= 30) ||
-    (Kekeruhan > 100 && Kekeruhan <= 200);
+  const row = await TB_HistoryPeramalan.findOne({
+    where: { ID_Tambak: ID_Tambak },
+    order: [["createdAt", "DESC"]],
+    attributes: ["Data_Parameter", "createdAt"]
+  });
+  if (!row) {
+    throw Object.assign(new Error("No TB_HistoryPeramalan found for this tambak"), { status: 404 });
+  }
 
-  if (bad) return "Buruk";
-  if (warn) return "Waspada";
-  return "Baik";
+  const DP = row?.Data_Parameter || {};
+  const sl = DP?.sensor_last || DP?.sensor || null;
+
+  const sensorNow = {
+    Suhu: num(sl?.Suhu ?? sl?.suhu) ?? 0,
+    PH: num(sl?.PH ?? sl?.pH ?? sl?.ph) ?? 0,
+    Salinitas: num(sl?.Salinitas ?? sl?.salinitas) ?? 0,
+    Kekeruhan: num(sl?.Kekeruhan ?? sl?.kekeruhan) ?? 0,
+  };
+  const sensorAt = sl?.at || null;
+  const fc = Array.isArray(DP?.forecast) ? DP.forecast : [];
+
+  return { sensorNow, sensorAt, forecast: fc, source: "historyperamalan" };
 }
 
 function worstStatus(a, b) {
@@ -64,120 +89,157 @@ function worstStatus(a, b) {
   return (rank[a] >= rank[b]) ? a : b;
 }
 
-function norm(p) {
-  const P = p?.Parameter ?? p ?? {};
-  const PH = P?.PH ?? P?.pH ?? P?.ph;
-  return {
-    Suhu: num(P?.Suhu ?? P?.suhu) ?? 0,
-    PH: num(PH) ?? 0,
-    Salinitas: num(P?.Salinitas ?? P?.salinitas) ?? 0,
-    Kekeruhan: num(P?.Kekeruhan ?? P?.kekeruhan) ?? 0,
-  };
+// ======== NEW: status dari forecast row (prioritaskan risk_label) ========
+function statusFromForecastRow(row) {
+  if (row?.risk_label === "Buruk" || row?.risk_label === "Waspada" || row?.risk_label === "Baik") {
+    return row.risk_label;
+  }
+  // fallback ke ambang SAFE_RANGE jika risk_label tak ada
+  const bad =
+    (row.Suhu < SAFE_RANGE.suhu.min || row.Suhu > SAFE_RANGE.suhu.max) ||
+    (row.PH   < SAFE_RANGE.ph.min   || row.PH   > SAFE_RANGE.ph.max)   ||
+    (row.Salinitas < SAFE_RANGE.sal.min || row.Salinitas > SAFE_RANGE.sal.max) ||
+    (row.Kekeruhan > SAFE_RANGE.turb.max);
+  const near =
+    (row.Suhu >= 26 && row.Suhu < 28) || (row.Suhu > 32 && row.Suhu <= 34) ||
+    (row.PH >= 7 && row.PH < 7.5) || (row.PH > 8.5 && row.PH <= 9) ||
+    (row.Salinitas >= 10 && row.Salinitas < 15) || (row.Salinitas > 25 && row.Salinitas <= 30) ||
+    (row.Kekeruhan > 100 && row.Kekeruhan <= 200);
+  if (bad) return "Buruk";
+  if (near) return "Waspada";
+  return "Baik";
 }
 
-function stats(arr) {
-  if (!arr.length) return { count: 0, min: null, max: null, mean: null };
-  let s = 0, min = +Infinity, max = -Infinity;
-  for (const v of arr) { s += v; if (v < min) min = v; if (v > max) max = v; }
-  return { count: arr.length, min, max, mean: +(s/arr.length).toFixed(2) };
+// ======== NEW: filter forecast ke depan saja & batasi hari ========
+function sliceFutureForecast(fcEff, rangeDays = 7) {
+  const now = Date.now();
+  const days = Math.max(1, Math.min(30, Number(rangeDays) || 7)); // 1..30
+  const until = dayjs(now).add(days, "day");
+  const rows = [];
+  for (const raw of fcEff) {
+    const r = normForecastRow(raw);
+    const ms = r.ts ? +new Date(r.ts) : NaN;
+    if (!Number.isFinite(ms)) continue;
+    if (ms <= now) continue;                 // ← buang masa lalu
+    if (dayjs(ms).isAfter(until)) continue;  // ← batasi max N hari
+    rows.push(r);
+  }
+  return { rows, days };
 }
 
-export const aiSummary = async (req, res, next) => {
+export const aiSummary = async (req, res) => {
   try {
-    const { sensor, forecast = [], meta = {}, debug: debugReq } = req.body || {};
-    const wantDebug = Boolean(debugReq ?? req.query?.debug); // <- aktifkan debug via body.debug atau ?debug=1
-    if (!sensor) return res.status(400).json({ message: "sensor is required" });
+    const { sensor, forecast, meta = {}, debug: debugReq, ID_Tambak, range_days, only_forecast } = req.body || {};
+    const wantDebug = Boolean(debugReq ?? req.query?.debug);
 
-    const sensorNow = {
-      Suhu: num(sensor.Suhu ?? sensor.suhu) ?? 0,
-      PH: num(sensor.PH ?? sensor.pH ?? sensor.ph) ?? 0,
-      Salinitas: num(sensor.Salinitas ?? sensor.salinitas) ?? 0,
-      Kekeruhan: num(sensor.Kekeruhan ?? sensor.kekeruhan) ?? 0,
-    };
-    const nowStatus = statusFromPoint(sensorNow);
+    const { sensorNow, sensorAt, forecast: fcEff, source } =
+      await resolveInputs({ sensor, forecast, ID_Tambak });
 
-    // --- PRIORITAS WQI FORECAST ---
+    // === gunakan HANYA FORECAST untuk ringkasan ===
+    const { rows: fwd, days } = sliceFutureForecast(fcEff, range_days ?? meta?.range?.days ?? 7);
+
+    if (!fwd.length) {
+      return res.status(400).json({ message: "Tidak ada data peramalan ke depan dalam jendela yang diminta." });
+    }
+
+    // status = agregasi 'terburuk' dalam jendela forecast
     let fcStatus = "Baik";
-    const wqis = forecast.map(extractWqi).filter(Number.isFinite);
-    const usedWqi = wqis.length > 0;
-    if (usedWqi) {
-      const minWqi = Math.min(...wqis);
-      fcStatus = wqiToStatusText(minWqi);
-    } else {
-      for (const raw of forecast) {
-        const s = statusFromPoint(norm(raw));
-        fcStatus = worstStatus(fcStatus, s);
-        if (fcStatus === "Buruk") break;
+    for (const r of fwd) {
+      fcStatus = worstStatus(fcStatus, statusFromForecastRow(r));
+      if (fcStatus === "Buruk") break;
+    }
+    const finalStatus = fcStatus; // <-- tidak digabung dengan sensor_now
+
+    // statistik MIN–MAX p50 untuk BARIS ANGKA
+    const stS = stats(fwd.map(r => r.Suhu));
+    const stP = stats(fwd.map(r => r.PH));
+    const stSa= stats(fwd.map(r => r.Salinitas));
+    const stT = stats(fwd.map(r => r.Kekeruhan));
+
+    const fmt = {
+      rng: (s, u="") => (Number.isFinite(s.min) && Number.isFinite(s.max))
+        ? `${s.min.toFixed(u==="NTU"?0:2)}–${s.max.toFixed(u==="NTU"?0:2)}${u ? ` ${u}` : ""}`
+        : "NA",
+    };
+
+    const numbersLine =
+      `Peramalan ${days} hari → ` +
+      `Suhu ${fmt.rng(stS,"°C")}, pH ${fmt.rng(stP)}, ` +
+      `Salinitas ${fmt.rng(stSa," ppt")}, Kekeruhan ${fmt.rng(stT,"NTU")}.`;
+
+    // coba OpenAI; instruksi: JANGAN sarankan ganti air laut
+    const key = (process.env.OPEN_AI_KEY || process.env.OPENAI_API_KEY || null);
+    let content = "";
+    if (key) {
+      try {
+        const openai = new OpenAI({ apiKey: key });
+        const system = [
+          "Kamu asisten kualitas air tambak LAUT (skala besar, sulit mengganti air).",
+          "Jawab ringkas, actionable, Bahasa Indonesia,dan mudah dipahami untuk pemula.",
+          "Batas acuan: suhu 26–34°C, pH 7–9, salinitas 10–30 ppt, kekeruhan ≤200 NTU.",
+          "Output maks 45 kata, SATU paragraf.",
+          "Mulai jawaban dengan BARIS ANGKA yang diberikan.",
+          "JANGAN menyarankan penggantian air; fokus aerasi/sirkulasi, manajemen pakan, shading, buffering pH/salinitas yang aman."
+        ].join(" ");
+        const userPrompt = [
+          `BARIS PARAMETER: ${numbersLine}`,
+          `Status peramalan gabungan: ${finalStatus}.`,
+          "Setelah baris angka, beri 1–2 saran praktis yang relevan untuk lingkungan laut (tanpa ganti air).",
+          "Jangan lebih dari 45 kata."
+        ].join("\n");
+
+        const completion = await openai.chat.completions.create({
+          model: "gpt-3.5-turbo-0125",
+          temperature: 0.2,
+          messages: [
+            { role: "system", content: system },
+            { role: "user", content: userPrompt }
+          ]
+        });
+        content = completion.choices?.[0]?.message?.content?.trim() || "";
+      } catch (e) {
+        console.error("OpenAI error:", e?.message || e);
       }
     }
 
-    const finalStatus = worstStatus(nowStatus, fcStatus);
+    // fallback deterministik (tanpa OpenAI / gagal)
+    const hasNumbers = content && content.includes("Peramalan");
+    if (!hasNumbers) {
+      const saran =
+        finalStatus === "Baik"
+          ? "Kondisi cenderung stabil; lanjutkan pemantauan berkala, jaga aerasi dan beban pakan."
+          : finalStatus === "Waspada"
+          ? "Waspada; optimalkan aerasi/sirkulasi, kurangi pakan sementara, cek pH/salinitas harian."
+          : "Risiko tinggi; maksimalkan aerasi, kurangi pakan, gunakan buffering pH/salinitas yang aman.";
+      content = `${numbersLine} Status ${finalStatus}. ${saran}`;
+    }
 
-    // --- Prompt OpenAI ringkas ---
-    const system = [
-      "Kamu asisten kualitas air tambak laut untuk Kerapu Cantang.",
-      "Jawab sangat ringkas, actionable, dan berbahasa Indonesia.",
-      "Gunakan batas: suhu 26–34°C, pH 7–9, salinitas 10–30 ppt, kekeruhan ≤200 NTU.",
-      "Output HARUS 1 paragraf saja, tanpa bullet/heading, total 30–40 kata MAKSIMAL.",
-      "jangan sebut forecast tapi sebut peramalan"
-    ].join(" ");
+    const fcStats = {
+      Suhu: stS, PH: stP, Salinitas: stSa, Kekeruhan: stT
+    };
 
-    const userPrompt = [
-      `DATA: Suhu=${sensorNow.Suhu}°C, pH=${sensorNow.PH}, Salinitas=${sensorNow.Salinitas} ppt, Kekeruhan=${sensorNow.Kekeruhan} NTU.`,
-      `peramalan: ${forecast?.length ? `${forecast.length} titik ke depan (gunakan jika perlu).` : "tidak ada."}`,
-      `Status sistem (gabungan sensor+): ${finalStatus}.`,
-      "",
-      "TULIS:",
-      "- Ringkas kondisi inti + 1–2 saran praktis + antisipasi singkat jika ada indikasi perubahan dari peramalan.",
-      "- Maksimal 35 kata total. Jangan pakai list. Satu paragraf.",
-    ].join("\n");
-
-    const openai = new OpenAI({ apiKey: getServerOpenAIKey() });
-    const completion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo-0125",
-      temperature: 0.2,
-      messages: [
-        { role: "system", content: system },
-        { role: "user", content: userPrompt }
-      ]
-    });
-
-    const content = completion.choices?.[0]?.message?.content?.trim() || "";
-
-    // --- DEBUG payload biar “kelihatan parameternya” ---
     const debug = wantDebug ? {
-      safe_range: SAFE_RANGE,
-      wqi_thresholds: WQI_THRESH,
-      input: {
-        sensor_now: sensorNow,
-        forecast_len: forecast?.length ?? 0,
-      },
-      computed: {
-        nowStatus,
-        fcStatus,
-        finalStatus,
-        usedWqi,
-        wqi_stats: stats(wqis),
-      },
-      samples: {
-        first3: (forecast || []).slice(0,3).map((it, i) => {
-          const n = norm(it);
-          return {
-            idx: i,
-            WQI: extractWqi(it) ?? null,
-            Suhu: n.Suhu, PH: n.PH, Salinitas: n.Salinitas, Kekeruhan: n.Kekeruhan,
-            raw_time: it?.Time || it?.time || it?.timestamp || null,
-          };
-        })
-      },
+      source,
+      used_window_days: days,
+      forecast_len_total: fcEff.length,
+      forecast_len_future: fwd.length,
+      computed: { finalStatus },
       meta
     } : undefined;
 
     return res.json({
       status: finalStatus,
-      condition_text: content,
-      used: { ranges: SAFE_RANGE, meta },
+      condition_text: content,              // ← dari forecast, bukan sensor_last
+      numbers: {
+        forecast_window_days: days,
+        minmax_p50: fcStats,               // ← MIN–MAX p50 di jendela
+      },
+      used: { from: source, ranges: SAFE_RANGE, meta },
       ...(wantDebug ? { debug } : {})
     });
-  } catch (e) { next(e); }
+  } catch (e) {
+    const code = e?.status || 500;
+    console.error("aiSummary fatal:", e);
+    res.status(code).json({ message: e?.message || "aiSummary failed" });
+  }
 };

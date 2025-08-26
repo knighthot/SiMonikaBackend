@@ -1,0 +1,4250 @@
+{
+    "final_status": "Buruk",
+    "seed_window": {
+        "from": "2025-08-26T09:19:52.727Z",
+        "to": "2025-08-26T10:19:52.727Z"
+    },
+    "used_seed": true
+}
+
+{
+    "meta": {
+        "model": "tft",
+        "version": "1.0.0",
+        "frequency": "hourly",
+        "horizon": 168,
+        "issued_at": "2025-08-26T10:19:52.795Z",
+        "window": null,
+        "input": {
+            "id_tambak": "320b04a5-fd9c-4edd-815a-2016ab1c5552",
+            "id_perangkat_iot": null,
+            "variables": [
+                "Suhu",
+                "PH",
+                "Salinitas",
+                "Kekeruhan"
+            ],
+            "history_range": null
+        },
+        "metrics": {
+            "mae": null,
+            "rmse": null
+        },
+        "notes": "Dummy forecast — bukan hasil model"
+    },
+    "seed_base": {
+        "Suhu": 28.4,
+        "PH": 7.8,
+        "Salinitas": 28.06,
+        "Kekeruhan": 41.02
+    },
+    "sensor_last": {
+        "Suhu": 24,
+        "PH": 6.8,
+        "Salinitas": 34.117,
+        "Kekeruhan": 14.992,
+        "at": "2025-08-26T09:57:30.000Z"
+    },
+    "forecast": [
+        {
+            "ts": "2025-08-26T11:19:52.792Z",
+            "Suhu": {
+                "p50": 28.71,
+                "p90_low": 27.91,
+                "p90_high": 29.51
+            },
+            "PH": {
+                "p50": 7.78,
+                "p90_low": 7.48,
+                "p90_high": 8.08
+            },
+            "Salinitas": {
+                "p50": 27.48,
+                "p90_low": 24.48,
+                "p90_high": 30.48
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-26T12:19:52.792Z",
+            "Suhu": {
+                "p50": 27.89,
+                "p90_low": 27.09,
+                "p90_high": 28.69
+            },
+            "PH": {
+                "p50": 7.79,
+                "p90_low": 7.49,
+                "p90_high": 8.09
+            },
+            "Salinitas": {
+                "p50": 26.78,
+                "p90_low": 23.78,
+                "p90_high": 29.78
+            },
+            "Kekeruhan": {
+                "p50": 32,
+                "p90_low": 0,
+                "p90_high": 72
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-26T13:19:52.792Z",
+            "Suhu": {
+                "p50": 28.1,
+                "p90_low": 27.3,
+                "p90_high": 28.9
+            },
+            "PH": {
+                "p50": 7.94,
+                "p90_low": 7.64,
+                "p90_high": 8.24
+            },
+            "Salinitas": {
+                "p50": 26.3,
+                "p90_low": 23.3,
+                "p90_high": 29.3
+            },
+            "Kekeruhan": {
+                "p50": 55,
+                "p90_low": 15,
+                "p90_high": 95
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-26T14:19:52.792Z",
+            "Suhu": {
+                "p50": 28.33,
+                "p90_low": 27.53,
+                "p90_high": 29.13
+            },
+            "PH": {
+                "p50": 7.91,
+                "p90_low": 7.61,
+                "p90_high": 8.21
+            },
+            "Salinitas": {
+                "p50": 30.12,
+                "p90_low": 27.12,
+                "p90_high": 33.12
+            },
+            "Kekeruhan": {
+                "p50": 35,
+                "p90_low": 0,
+                "p90_high": 75
+            },
+            "risk_index": 0.8,
+            "risk_label": "Buruk"
+        },
+        {
+            "ts": "2025-08-26T15:19:52.792Z",
+            "Suhu": {
+                "p50": 29,
+                "p90_low": 28.2,
+                "p90_high": 29.8
+            },
+            "PH": {
+                "p50": 7.97,
+                "p90_low": 7.67,
+                "p90_high": 8.27
+            },
+            "Salinitas": {
+                "p50": 27.32,
+                "p90_low": 24.32,
+                "p90_high": 30.32
+            },
+            "Kekeruhan": {
+                "p50": 37,
+                "p90_low": 0,
+                "p90_high": 77
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-26T16:19:52.792Z",
+            "Suhu": {
+                "p50": 27.95,
+                "p90_low": 27.15,
+                "p90_high": 28.75
+            },
+            "PH": {
+                "p50": 7.86,
+                "p90_low": 7.56,
+                "p90_high": 8.16
+            },
+            "Salinitas": {
+                "p50": 29.47,
+                "p90_low": 26.47,
+                "p90_high": 32.47
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-26T17:19:52.792Z",
+            "Suhu": {
+                "p50": 27.73,
+                "p90_low": 26.93,
+                "p90_high": 28.53
+            },
+            "PH": {
+                "p50": 7.87,
+                "p90_low": 7.57,
+                "p90_high": 8.17
+            },
+            "Salinitas": {
+                "p50": 30.28,
+                "p90_low": 27.28,
+                "p90_high": 33.28
+            },
+            "Kekeruhan": {
+                "p50": 38,
+                "p90_low": 0,
+                "p90_high": 78
+            },
+            "risk_index": 0.8,
+            "risk_label": "Buruk"
+        },
+        {
+            "ts": "2025-08-26T18:19:52.792Z",
+            "Suhu": {
+                "p50": 29.08,
+                "p90_low": 28.28,
+                "p90_high": 29.88
+            },
+            "PH": {
+                "p50": 7.95,
+                "p90_low": 7.65,
+                "p90_high": 8.25
+            },
+            "Salinitas": {
+                "p50": 29.56,
+                "p90_low": 26.56,
+                "p90_high": 32.56
+            },
+            "Kekeruhan": {
+                "p50": 63,
+                "p90_low": 23,
+                "p90_high": 103
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-26T19:19:52.792Z",
+            "Suhu": {
+                "p50": 28.25,
+                "p90_low": 27.45,
+                "p90_high": 29.05
+            },
+            "PH": {
+                "p50": 7.78,
+                "p90_low": 7.48,
+                "p90_high": 8.08
+            },
+            "Salinitas": {
+                "p50": 26.62,
+                "p90_low": 23.62,
+                "p90_high": 29.62
+            },
+            "Kekeruhan": {
+                "p50": 44,
+                "p90_low": 4,
+                "p90_high": 84
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-26T20:19:52.792Z",
+            "Suhu": {
+                "p50": 27.87,
+                "p90_low": 27.07,
+                "p90_high": 28.67
+            },
+            "PH": {
+                "p50": 7.65,
+                "p90_low": 7.35,
+                "p90_high": 7.95
+            },
+            "Salinitas": {
+                "p50": 27.82,
+                "p90_low": 24.82,
+                "p90_high": 30.82
+            },
+            "Kekeruhan": {
+                "p50": 33,
+                "p90_low": 0,
+                "p90_high": 73
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-26T21:19:52.792Z",
+            "Suhu": {
+                "p50": 27.84,
+                "p90_low": 27.04,
+                "p90_high": 28.64
+            },
+            "PH": {
+                "p50": 8.04,
+                "p90_low": 7.74,
+                "p90_high": 8.34
+            },
+            "Salinitas": {
+                "p50": 29.97,
+                "p90_low": 26.97,
+                "p90_high": 32.97
+            },
+            "Kekeruhan": {
+                "p50": 70,
+                "p90_low": 30,
+                "p90_high": 110
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-26T22:19:52.792Z",
+            "Suhu": {
+                "p50": 28.58,
+                "p90_low": 27.78,
+                "p90_high": 29.38
+            },
+            "PH": {
+                "p50": 7.66,
+                "p90_low": 7.36,
+                "p90_high": 7.96
+            },
+            "Salinitas": {
+                "p50": 30.07,
+                "p90_low": 27.07,
+                "p90_high": 33.07
+            },
+            "Kekeruhan": {
+                "p50": 63,
+                "p90_low": 23,
+                "p90_high": 103
+            },
+            "risk_index": 0.8,
+            "risk_label": "Buruk"
+        },
+        {
+            "ts": "2025-08-26T23:19:52.792Z",
+            "Suhu": {
+                "p50": 28.77,
+                "p90_low": 27.97,
+                "p90_high": 29.57
+            },
+            "PH": {
+                "p50": 7.83,
+                "p90_low": 7.53,
+                "p90_high": 8.13
+            },
+            "Salinitas": {
+                "p50": 26.36,
+                "p90_low": 23.36,
+                "p90_high": 29.36
+            },
+            "Kekeruhan": {
+                "p50": 67,
+                "p90_low": 27,
+                "p90_high": 107
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-27T00:19:52.792Z",
+            "Suhu": {
+                "p50": 27.95,
+                "p90_low": 27.15,
+                "p90_high": 28.75
+            },
+            "PH": {
+                "p50": 7.72,
+                "p90_low": 7.42,
+                "p90_high": 8.02
+            },
+            "Salinitas": {
+                "p50": 28.35,
+                "p90_low": 25.35,
+                "p90_high": 31.35
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-27T01:19:52.792Z",
+            "Suhu": {
+                "p50": 28.63,
+                "p90_low": 27.83,
+                "p90_high": 29.43
+            },
+            "PH": {
+                "p50": 7.68,
+                "p90_low": 7.38,
+                "p90_high": 7.98
+            },
+            "Salinitas": {
+                "p50": 29.55,
+                "p90_low": 26.55,
+                "p90_high": 32.55
+            },
+            "Kekeruhan": {
+                "p50": 48,
+                "p90_low": 8,
+                "p90_high": 88
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-27T02:19:52.792Z",
+            "Suhu": {
+                "p50": 29,
+                "p90_low": 28.2,
+                "p90_high": 29.8
+            },
+            "PH": {
+                "p50": 7.84,
+                "p90_low": 7.54,
+                "p90_high": 8.14
+            },
+            "Salinitas": {
+                "p50": 27.91,
+                "p90_low": 24.91,
+                "p90_high": 30.91
+            },
+            "Kekeruhan": {
+                "p50": 56,
+                "p90_low": 16,
+                "p90_high": 96
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-27T03:19:52.792Z",
+            "Suhu": {
+                "p50": 28.97,
+                "p90_low": 28.17,
+                "p90_high": 29.77
+            },
+            "PH": {
+                "p50": 8.01,
+                "p90_low": 7.71,
+                "p90_high": 8.31
+            },
+            "Salinitas": {
+                "p50": 27.3,
+                "p90_low": 24.3,
+                "p90_high": 30.3
+            },
+            "Kekeruhan": {
+                "p50": 34,
+                "p90_low": 0,
+                "p90_high": 74
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-27T04:19:52.792Z",
+            "Suhu": {
+                "p50": 27.99,
+                "p90_low": 27.19,
+                "p90_high": 28.79
+            },
+            "PH": {
+                "p50": 7.71,
+                "p90_low": 7.41,
+                "p90_high": 8.01
+            },
+            "Salinitas": {
+                "p50": 30.37,
+                "p90_low": 27.37,
+                "p90_high": 33.37
+            },
+            "Kekeruhan": {
+                "p50": 69,
+                "p90_low": 29,
+                "p90_high": 109
+            },
+            "risk_index": 0.8,
+            "risk_label": "Buruk"
+        },
+        {
+            "ts": "2025-08-27T05:19:52.792Z",
+            "Suhu": {
+                "p50": 28.27,
+                "p90_low": 27.47,
+                "p90_high": 29.07
+            },
+            "PH": {
+                "p50": 7.58,
+                "p90_low": 7.28,
+                "p90_high": 7.88
+            },
+            "Salinitas": {
+                "p50": 29.15,
+                "p90_low": 26.15,
+                "p90_high": 32.15
+            },
+            "Kekeruhan": {
+                "p50": 37,
+                "p90_low": 0,
+                "p90_high": 77
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-27T06:19:52.792Z",
+            "Suhu": {
+                "p50": 28.14,
+                "p90_low": 27.34,
+                "p90_high": 28.94
+            },
+            "PH": {
+                "p50": 7.85,
+                "p90_low": 7.55,
+                "p90_high": 8.15
+            },
+            "Salinitas": {
+                "p50": 26,
+                "p90_low": 23,
+                "p90_high": 29
+            },
+            "Kekeruhan": {
+                "p50": 57,
+                "p90_low": 17,
+                "p90_high": 97
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-27T07:19:52.792Z",
+            "Suhu": {
+                "p50": 27.78,
+                "p90_low": 26.98,
+                "p90_high": 28.58
+            },
+            "PH": {
+                "p50": 7.77,
+                "p90_low": 7.47,
+                "p90_high": 8.07
+            },
+            "Salinitas": {
+                "p50": 29.62,
+                "p90_low": 26.62,
+                "p90_high": 32.62
+            },
+            "Kekeruhan": {
+                "p50": 44,
+                "p90_low": 4,
+                "p90_high": 84
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-27T08:19:52.792Z",
+            "Suhu": {
+                "p50": 27.88,
+                "p90_low": 27.08,
+                "p90_high": 28.68
+            },
+            "PH": {
+                "p50": 7.79,
+                "p90_low": 7.49,
+                "p90_high": 8.09
+            },
+            "Salinitas": {
+                "p50": 26,
+                "p90_low": 23,
+                "p90_high": 29
+            },
+            "Kekeruhan": {
+                "p50": 50,
+                "p90_low": 10,
+                "p90_high": 90
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-27T09:19:52.792Z",
+            "Suhu": {
+                "p50": 28.47,
+                "p90_low": 27.67,
+                "p90_high": 29.27
+            },
+            "PH": {
+                "p50": 7.9,
+                "p90_low": 7.6,
+                "p90_high": 8.2
+            },
+            "Salinitas": {
+                "p50": 27.76,
+                "p90_low": 24.76,
+                "p90_high": 30.76
+            },
+            "Kekeruhan": {
+                "p50": 41,
+                "p90_low": 1,
+                "p90_high": 81
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-27T10:19:52.792Z",
+            "Suhu": {
+                "p50": 27.7,
+                "p90_low": 26.9,
+                "p90_high": 28.5
+            },
+            "PH": {
+                "p50": 7.92,
+                "p90_low": 7.62,
+                "p90_high": 8.22
+            },
+            "Salinitas": {
+                "p50": 27.64,
+                "p90_low": 24.64,
+                "p90_high": 30.64
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-27T11:19:52.792Z",
+            "Suhu": {
+                "p50": 28.88,
+                "p90_low": 28.08,
+                "p90_high": 29.68
+            },
+            "PH": {
+                "p50": 7.9,
+                "p90_low": 7.6,
+                "p90_high": 8.2
+            },
+            "Salinitas": {
+                "p50": 25.75,
+                "p90_low": 22.75,
+                "p90_high": 28.75
+            },
+            "Kekeruhan": {
+                "p50": 62,
+                "p90_low": 22,
+                "p90_high": 102
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-27T12:19:52.792Z",
+            "Suhu": {
+                "p50": 28.49,
+                "p90_low": 27.69,
+                "p90_high": 29.29
+            },
+            "PH": {
+                "p50": 7.73,
+                "p90_low": 7.43,
+                "p90_high": 8.03
+            },
+            "Salinitas": {
+                "p50": 26.09,
+                "p90_low": 23.09,
+                "p90_high": 29.09
+            },
+            "Kekeruhan": {
+                "p50": 57,
+                "p90_low": 17,
+                "p90_high": 97
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-27T13:19:52.792Z",
+            "Suhu": {
+                "p50": 28.17,
+                "p90_low": 27.37,
+                "p90_high": 28.97
+            },
+            "PH": {
+                "p50": 7.83,
+                "p90_low": 7.53,
+                "p90_high": 8.13
+            },
+            "Salinitas": {
+                "p50": 30.03,
+                "p90_low": 27.03,
+                "p90_high": 33.03
+            },
+            "Kekeruhan": {
+                "p50": 37,
+                "p90_low": 0,
+                "p90_high": 77
+            },
+            "risk_index": 0.8,
+            "risk_label": "Buruk"
+        },
+        {
+            "ts": "2025-08-27T14:19:52.792Z",
+            "Suhu": {
+                "p50": 27.75,
+                "p90_low": 26.95,
+                "p90_high": 28.55
+            },
+            "PH": {
+                "p50": 7.56,
+                "p90_low": 7.26,
+                "p90_high": 7.86
+            },
+            "Salinitas": {
+                "p50": 27.42,
+                "p90_low": 24.42,
+                "p90_high": 30.42
+            },
+            "Kekeruhan": {
+                "p50": 39,
+                "p90_low": 0,
+                "p90_high": 79
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-27T15:19:52.792Z",
+            "Suhu": {
+                "p50": 28.21,
+                "p90_low": 27.41,
+                "p90_high": 29.01
+            },
+            "PH": {
+                "p50": 7.63,
+                "p90_low": 7.33,
+                "p90_high": 7.93
+            },
+            "Salinitas": {
+                "p50": 28.92,
+                "p90_low": 25.92,
+                "p90_high": 31.92
+            },
+            "Kekeruhan": {
+                "p50": 70,
+                "p90_low": 30,
+                "p90_high": 110
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-27T16:19:52.792Z",
+            "Suhu": {
+                "p50": 28.64,
+                "p90_low": 27.84,
+                "p90_high": 29.44
+            },
+            "PH": {
+                "p50": 7.57,
+                "p90_low": 7.27,
+                "p90_high": 7.87
+            },
+            "Salinitas": {
+                "p50": 27.93,
+                "p90_low": 24.93,
+                "p90_high": 30.93
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-27T17:19:52.792Z",
+            "Suhu": {
+                "p50": 29.03,
+                "p90_low": 28.23,
+                "p90_high": 29.83
+            },
+            "PH": {
+                "p50": 7.91,
+                "p90_low": 7.61,
+                "p90_high": 8.21
+            },
+            "Salinitas": {
+                "p50": 26.06,
+                "p90_low": 23.06,
+                "p90_high": 29.06
+            },
+            "Kekeruhan": {
+                "p50": 70,
+                "p90_low": 30,
+                "p90_high": 110
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-27T18:19:52.792Z",
+            "Suhu": {
+                "p50": 28.03,
+                "p90_low": 27.23,
+                "p90_high": 28.83
+            },
+            "PH": {
+                "p50": 7.59,
+                "p90_low": 7.29,
+                "p90_high": 7.89
+            },
+            "Salinitas": {
+                "p50": 29.41,
+                "p90_low": 26.41,
+                "p90_high": 32.41
+            },
+            "Kekeruhan": {
+                "p50": 59,
+                "p90_low": 19,
+                "p90_high": 99
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-27T19:19:52.792Z",
+            "Suhu": {
+                "p50": 28.26,
+                "p90_low": 27.46,
+                "p90_high": 29.06
+            },
+            "PH": {
+                "p50": 7.68,
+                "p90_low": 7.38,
+                "p90_high": 7.98
+            },
+            "Salinitas": {
+                "p50": 27.12,
+                "p90_low": 24.12,
+                "p90_high": 30.12
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-27T20:19:52.792Z",
+            "Suhu": {
+                "p50": 27.86,
+                "p90_low": 27.06,
+                "p90_high": 28.66
+            },
+            "PH": {
+                "p50": 7.88,
+                "p90_low": 7.58,
+                "p90_high": 8.18
+            },
+            "Salinitas": {
+                "p50": 29.47,
+                "p90_low": 26.47,
+                "p90_high": 32.47
+            },
+            "Kekeruhan": {
+                "p50": 33,
+                "p90_low": 0,
+                "p90_high": 73
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-27T21:19:52.792Z",
+            "Suhu": {
+                "p50": 28.15,
+                "p90_low": 27.35,
+                "p90_high": 28.95
+            },
+            "PH": {
+                "p50": 7.91,
+                "p90_low": 7.61,
+                "p90_high": 8.21
+            },
+            "Salinitas": {
+                "p50": 26.65,
+                "p90_low": 23.65,
+                "p90_high": 29.65
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-27T22:19:52.792Z",
+            "Suhu": {
+                "p50": 28.36,
+                "p90_low": 27.56,
+                "p90_high": 29.16
+            },
+            "PH": {
+                "p50": 7.58,
+                "p90_low": 7.28,
+                "p90_high": 7.88
+            },
+            "Salinitas": {
+                "p50": 28.16,
+                "p90_low": 25.16,
+                "p90_high": 31.16
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-27T23:19:52.792Z",
+            "Suhu": {
+                "p50": 28.37,
+                "p90_low": 27.57,
+                "p90_high": 29.17
+            },
+            "PH": {
+                "p50": 7.78,
+                "p90_low": 7.48,
+                "p90_high": 8.08
+            },
+            "Salinitas": {
+                "p50": 25.78,
+                "p90_low": 22.78,
+                "p90_high": 28.78
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-28T00:19:52.792Z",
+            "Suhu": {
+                "p50": 27.92,
+                "p90_low": 27.12,
+                "p90_high": 28.72
+            },
+            "PH": {
+                "p50": 7.98,
+                "p90_low": 7.68,
+                "p90_high": 8.28
+            },
+            "Salinitas": {
+                "p50": 30.26,
+                "p90_low": 27.26,
+                "p90_high": 33.26
+            },
+            "Kekeruhan": {
+                "p50": 56,
+                "p90_low": 16,
+                "p90_high": 96
+            },
+            "risk_index": 0.8,
+            "risk_label": "Buruk"
+        },
+        {
+            "ts": "2025-08-28T01:19:52.792Z",
+            "Suhu": {
+                "p50": 28.15,
+                "p90_low": 27.35,
+                "p90_high": 28.95
+            },
+            "PH": {
+                "p50": 7.88,
+                "p90_low": 7.58,
+                "p90_high": 8.18
+            },
+            "Salinitas": {
+                "p50": 30.47,
+                "p90_low": 27.47,
+                "p90_high": 33.47
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.8,
+            "risk_label": "Buruk"
+        },
+        {
+            "ts": "2025-08-28T02:19:52.792Z",
+            "Suhu": {
+                "p50": 28.82,
+                "p90_low": 28.02,
+                "p90_high": 29.62
+            },
+            "PH": {
+                "p50": 7.95,
+                "p90_low": 7.65,
+                "p90_high": 8.25
+            },
+            "Salinitas": {
+                "p50": 27.72,
+                "p90_low": 24.72,
+                "p90_high": 30.72
+            },
+            "Kekeruhan": {
+                "p50": 32,
+                "p90_low": 0,
+                "p90_high": 72
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-28T03:19:52.792Z",
+            "Suhu": {
+                "p50": 28.29,
+                "p90_low": 27.49,
+                "p90_high": 29.09
+            },
+            "PH": {
+                "p50": 7.67,
+                "p90_low": 7.37,
+                "p90_high": 7.97
+            },
+            "Salinitas": {
+                "p50": 27.31,
+                "p90_low": 24.31,
+                "p90_high": 30.31
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-28T04:19:52.792Z",
+            "Suhu": {
+                "p50": 28.82,
+                "p90_low": 28.02,
+                "p90_high": 29.62
+            },
+            "PH": {
+                "p50": 7.73,
+                "p90_low": 7.43,
+                "p90_high": 8.03
+            },
+            "Salinitas": {
+                "p50": 25.88,
+                "p90_low": 22.88,
+                "p90_high": 28.88
+            },
+            "Kekeruhan": {
+                "p50": 46,
+                "p90_low": 6,
+                "p90_high": 86
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-28T05:19:52.792Z",
+            "Suhu": {
+                "p50": 28.59,
+                "p90_low": 27.79,
+                "p90_high": 29.39
+            },
+            "PH": {
+                "p50": 7.76,
+                "p90_low": 7.46,
+                "p90_high": 8.06
+            },
+            "Salinitas": {
+                "p50": 28.02,
+                "p90_low": 25.02,
+                "p90_high": 31.02
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-28T06:19:52.792Z",
+            "Suhu": {
+                "p50": 28.53,
+                "p90_low": 27.73,
+                "p90_high": 29.33
+            },
+            "PH": {
+                "p50": 7.82,
+                "p90_low": 7.52,
+                "p90_high": 8.12
+            },
+            "Salinitas": {
+                "p50": 28.09,
+                "p90_low": 25.09,
+                "p90_high": 31.09
+            },
+            "Kekeruhan": {
+                "p50": 39,
+                "p90_low": 0,
+                "p90_high": 79
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-28T07:19:52.792Z",
+            "Suhu": {
+                "p50": 28.37,
+                "p90_low": 27.57,
+                "p90_high": 29.17
+            },
+            "PH": {
+                "p50": 7.63,
+                "p90_low": 7.33,
+                "p90_high": 7.93
+            },
+            "Salinitas": {
+                "p50": 28.23,
+                "p90_low": 25.23,
+                "p90_high": 31.23
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-28T08:19:52.792Z",
+            "Suhu": {
+                "p50": 28.6,
+                "p90_low": 27.8,
+                "p90_high": 29.4
+            },
+            "PH": {
+                "p50": 7.71,
+                "p90_low": 7.41,
+                "p90_high": 8.01
+            },
+            "Salinitas": {
+                "p50": 27.84,
+                "p90_low": 24.84,
+                "p90_high": 30.84
+            },
+            "Kekeruhan": {
+                "p50": 34,
+                "p90_low": 0,
+                "p90_high": 74
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-28T09:19:52.792Z",
+            "Suhu": {
+                "p50": 28.42,
+                "p90_low": 27.62,
+                "p90_high": 29.22
+            },
+            "PH": {
+                "p50": 7.73,
+                "p90_low": 7.43,
+                "p90_high": 8.03
+            },
+            "Salinitas": {
+                "p50": 30.03,
+                "p90_low": 27.03,
+                "p90_high": 33.03
+            },
+            "Kekeruhan": {
+                "p50": 65,
+                "p90_low": 25,
+                "p90_high": 105
+            },
+            "risk_index": 0.8,
+            "risk_label": "Buruk"
+        },
+        {
+            "ts": "2025-08-28T10:19:52.792Z",
+            "Suhu": {
+                "p50": 29.03,
+                "p90_low": 28.23,
+                "p90_high": 29.83
+            },
+            "PH": {
+                "p50": 7.76,
+                "p90_low": 7.46,
+                "p90_high": 8.06
+            },
+            "Salinitas": {
+                "p50": 27.43,
+                "p90_low": 24.43,
+                "p90_high": 30.43
+            },
+            "Kekeruhan": {
+                "p50": 60,
+                "p90_low": 20,
+                "p90_high": 100
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-28T11:19:52.792Z",
+            "Suhu": {
+                "p50": 28.88,
+                "p90_low": 28.08,
+                "p90_high": 29.68
+            },
+            "PH": {
+                "p50": 7.98,
+                "p90_low": 7.68,
+                "p90_high": 8.28
+            },
+            "Salinitas": {
+                "p50": 30.2,
+                "p90_low": 27.2,
+                "p90_high": 33.2
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.8,
+            "risk_label": "Buruk"
+        },
+        {
+            "ts": "2025-08-28T12:19:52.792Z",
+            "Suhu": {
+                "p50": 28.16,
+                "p90_low": 27.36,
+                "p90_high": 28.96
+            },
+            "PH": {
+                "p50": 7.92,
+                "p90_low": 7.62,
+                "p90_high": 8.22
+            },
+            "Salinitas": {
+                "p50": 26.34,
+                "p90_low": 23.34,
+                "p90_high": 29.34
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-28T13:19:52.792Z",
+            "Suhu": {
+                "p50": 28.77,
+                "p90_low": 27.97,
+                "p90_high": 29.57
+            },
+            "PH": {
+                "p50": 7.84,
+                "p90_low": 7.54,
+                "p90_high": 8.14
+            },
+            "Salinitas": {
+                "p50": 29.83,
+                "p90_low": 26.83,
+                "p90_high": 32.83
+            },
+            "Kekeruhan": {
+                "p50": 32,
+                "p90_low": 0,
+                "p90_high": 72
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-28T14:19:52.792Z",
+            "Suhu": {
+                "p50": 28.64,
+                "p90_low": 27.84,
+                "p90_high": 29.44
+            },
+            "PH": {
+                "p50": 7.63,
+                "p90_low": 7.33,
+                "p90_high": 7.93
+            },
+            "Salinitas": {
+                "p50": 26.72,
+                "p90_low": 23.72,
+                "p90_high": 29.72
+            },
+            "Kekeruhan": {
+                "p50": 66,
+                "p90_low": 26,
+                "p90_high": 106
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-28T15:19:52.792Z",
+            "Suhu": {
+                "p50": 28.28,
+                "p90_low": 27.48,
+                "p90_high": 29.08
+            },
+            "PH": {
+                "p50": 7.96,
+                "p90_low": 7.66,
+                "p90_high": 8.26
+            },
+            "Salinitas": {
+                "p50": 27.6,
+                "p90_low": 24.6,
+                "p90_high": 30.6
+            },
+            "Kekeruhan": {
+                "p50": 42,
+                "p90_low": 2,
+                "p90_high": 82
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-28T16:19:52.792Z",
+            "Suhu": {
+                "p50": 29.1,
+                "p90_low": 28.3,
+                "p90_high": 29.9
+            },
+            "PH": {
+                "p50": 8.05,
+                "p90_low": 7.75,
+                "p90_high": 8.35
+            },
+            "Salinitas": {
+                "p50": 27,
+                "p90_low": 24,
+                "p90_high": 30
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-28T17:19:52.792Z",
+            "Suhu": {
+                "p50": 28.69,
+                "p90_low": 27.89,
+                "p90_high": 29.49
+            },
+            "PH": {
+                "p50": 7.86,
+                "p90_low": 7.56,
+                "p90_high": 8.16
+            },
+            "Salinitas": {
+                "p50": 27.87,
+                "p90_low": 24.87,
+                "p90_high": 30.87
+            },
+            "Kekeruhan": {
+                "p50": 50,
+                "p90_low": 10,
+                "p90_high": 90
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-28T18:19:52.792Z",
+            "Suhu": {
+                "p50": 28.11,
+                "p90_low": 27.31,
+                "p90_high": 28.91
+            },
+            "PH": {
+                "p50": 7.65,
+                "p90_low": 7.35,
+                "p90_high": 7.95
+            },
+            "Salinitas": {
+                "p50": 26.41,
+                "p90_low": 23.41,
+                "p90_high": 29.41
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-28T19:19:52.792Z",
+            "Suhu": {
+                "p50": 28.1,
+                "p90_low": 27.3,
+                "p90_high": 28.9
+            },
+            "PH": {
+                "p50": 7.78,
+                "p90_low": 7.48,
+                "p90_high": 8.08
+            },
+            "Salinitas": {
+                "p50": 26.73,
+                "p90_low": 23.73,
+                "p90_high": 29.73
+            },
+            "Kekeruhan": {
+                "p50": 58,
+                "p90_low": 18,
+                "p90_high": 98
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-28T20:19:52.792Z",
+            "Suhu": {
+                "p50": 28.48,
+                "p90_low": 27.68,
+                "p90_high": 29.28
+            },
+            "PH": {
+                "p50": 7.83,
+                "p90_low": 7.53,
+                "p90_high": 8.13
+            },
+            "Salinitas": {
+                "p50": 28.52,
+                "p90_low": 25.52,
+                "p90_high": 31.52
+            },
+            "Kekeruhan": {
+                "p50": 60,
+                "p90_low": 20,
+                "p90_high": 100
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-28T21:19:52.792Z",
+            "Suhu": {
+                "p50": 28.8,
+                "p90_low": 28,
+                "p90_high": 29.6
+            },
+            "PH": {
+                "p50": 7.57,
+                "p90_low": 7.27,
+                "p90_high": 7.87
+            },
+            "Salinitas": {
+                "p50": 27.09,
+                "p90_low": 24.09,
+                "p90_high": 30.09
+            },
+            "Kekeruhan": {
+                "p50": 37,
+                "p90_low": 0,
+                "p90_high": 77
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-28T22:19:52.792Z",
+            "Suhu": {
+                "p50": 28.73,
+                "p90_low": 27.93,
+                "p90_high": 29.53
+            },
+            "PH": {
+                "p50": 7.82,
+                "p90_low": 7.52,
+                "p90_high": 8.12
+            },
+            "Salinitas": {
+                "p50": 26.71,
+                "p90_low": 23.71,
+                "p90_high": 29.71
+            },
+            "Kekeruhan": {
+                "p50": 33,
+                "p90_low": 0,
+                "p90_high": 73
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-28T23:19:52.792Z",
+            "Suhu": {
+                "p50": 27.92,
+                "p90_low": 27.12,
+                "p90_high": 28.72
+            },
+            "PH": {
+                "p50": 7.66,
+                "p90_low": 7.36,
+                "p90_high": 7.96
+            },
+            "Salinitas": {
+                "p50": 26.42,
+                "p90_low": 23.42,
+                "p90_high": 29.42
+            },
+            "Kekeruhan": {
+                "p50": 57,
+                "p90_low": 17,
+                "p90_high": 97
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-29T00:19:52.792Z",
+            "Suhu": {
+                "p50": 28.69,
+                "p90_low": 27.89,
+                "p90_high": 29.49
+            },
+            "PH": {
+                "p50": 7.65,
+                "p90_low": 7.35,
+                "p90_high": 7.95
+            },
+            "Salinitas": {
+                "p50": 29.61,
+                "p90_low": 26.61,
+                "p90_high": 32.61
+            },
+            "Kekeruhan": {
+                "p50": 60,
+                "p90_low": 20,
+                "p90_high": 100
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-29T01:19:52.792Z",
+            "Suhu": {
+                "p50": 28.97,
+                "p90_low": 28.17,
+                "p90_high": 29.77
+            },
+            "PH": {
+                "p50": 7.57,
+                "p90_low": 7.27,
+                "p90_high": 7.87
+            },
+            "Salinitas": {
+                "p50": 27.87,
+                "p90_low": 24.87,
+                "p90_high": 30.87
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-29T02:19:52.792Z",
+            "Suhu": {
+                "p50": 28.22,
+                "p90_low": 27.42,
+                "p90_high": 29.02
+            },
+            "PH": {
+                "p50": 7.99,
+                "p90_low": 7.69,
+                "p90_high": 8.29
+            },
+            "Salinitas": {
+                "p50": 28.15,
+                "p90_low": 25.15,
+                "p90_high": 31.15
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-29T03:19:52.792Z",
+            "Suhu": {
+                "p50": 28.69,
+                "p90_low": 27.89,
+                "p90_high": 29.49
+            },
+            "PH": {
+                "p50": 7.6,
+                "p90_low": 7.3,
+                "p90_high": 7.9
+            },
+            "Salinitas": {
+                "p50": 29.23,
+                "p90_low": 26.23,
+                "p90_high": 32.23
+            },
+            "Kekeruhan": {
+                "p50": 32,
+                "p90_low": 0,
+                "p90_high": 72
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-29T04:19:52.792Z",
+            "Suhu": {
+                "p50": 27.77,
+                "p90_low": 26.97,
+                "p90_high": 28.57
+            },
+            "PH": {
+                "p50": 7.72,
+                "p90_low": 7.42,
+                "p90_high": 8.02
+            },
+            "Salinitas": {
+                "p50": 26.72,
+                "p90_low": 23.72,
+                "p90_high": 29.72
+            },
+            "Kekeruhan": {
+                "p50": 69,
+                "p90_low": 29,
+                "p90_high": 109
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-29T05:19:52.792Z",
+            "Suhu": {
+                "p50": 27.78,
+                "p90_low": 26.98,
+                "p90_high": 28.58
+            },
+            "PH": {
+                "p50": 7.6,
+                "p90_low": 7.3,
+                "p90_high": 7.9
+            },
+            "Salinitas": {
+                "p50": 27.62,
+                "p90_low": 24.62,
+                "p90_high": 30.62
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-29T06:19:52.792Z",
+            "Suhu": {
+                "p50": 28.66,
+                "p90_low": 27.86,
+                "p90_high": 29.46
+            },
+            "PH": {
+                "p50": 7.79,
+                "p90_low": 7.49,
+                "p90_high": 8.09
+            },
+            "Salinitas": {
+                "p50": 29.61,
+                "p90_low": 26.61,
+                "p90_high": 32.61
+            },
+            "Kekeruhan": {
+                "p50": 40,
+                "p90_low": 0,
+                "p90_high": 80
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-29T07:19:52.792Z",
+            "Suhu": {
+                "p50": 28.97,
+                "p90_low": 28.17,
+                "p90_high": 29.77
+            },
+            "PH": {
+                "p50": 7.58,
+                "p90_low": 7.28,
+                "p90_high": 7.88
+            },
+            "Salinitas": {
+                "p50": 29.9,
+                "p90_low": 26.9,
+                "p90_high": 32.9
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-29T08:19:52.792Z",
+            "Suhu": {
+                "p50": 29.08,
+                "p90_low": 28.28,
+                "p90_high": 29.88
+            },
+            "PH": {
+                "p50": 7.87,
+                "p90_low": 7.57,
+                "p90_high": 8.17
+            },
+            "Salinitas": {
+                "p50": 27.31,
+                "p90_low": 24.31,
+                "p90_high": 30.31
+            },
+            "Kekeruhan": {
+                "p50": 32,
+                "p90_low": 0,
+                "p90_high": 72
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-29T09:19:52.792Z",
+            "Suhu": {
+                "p50": 29.09,
+                "p90_low": 28.29,
+                "p90_high": 29.89
+            },
+            "PH": {
+                "p50": 7.96,
+                "p90_low": 7.66,
+                "p90_high": 8.26
+            },
+            "Salinitas": {
+                "p50": 29.39,
+                "p90_low": 26.39,
+                "p90_high": 32.39
+            },
+            "Kekeruhan": {
+                "p50": 36,
+                "p90_low": 0,
+                "p90_high": 76
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-29T10:19:52.792Z",
+            "Suhu": {
+                "p50": 27.96,
+                "p90_low": 27.16,
+                "p90_high": 28.76
+            },
+            "PH": {
+                "p50": 7.92,
+                "p90_low": 7.62,
+                "p90_high": 8.22
+            },
+            "Salinitas": {
+                "p50": 28.93,
+                "p90_low": 25.93,
+                "p90_high": 31.93
+            },
+            "Kekeruhan": {
+                "p50": 40,
+                "p90_low": 0,
+                "p90_high": 80
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-29T11:19:52.792Z",
+            "Suhu": {
+                "p50": 27.99,
+                "p90_low": 27.19,
+                "p90_high": 28.79
+            },
+            "PH": {
+                "p50": 7.92,
+                "p90_low": 7.62,
+                "p90_high": 8.22
+            },
+            "Salinitas": {
+                "p50": 29.03,
+                "p90_low": 26.03,
+                "p90_high": 32.03
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-29T12:19:52.792Z",
+            "Suhu": {
+                "p50": 28.14,
+                "p90_low": 27.34,
+                "p90_high": 28.94
+            },
+            "PH": {
+                "p50": 7.68,
+                "p90_low": 7.38,
+                "p90_high": 7.98
+            },
+            "Salinitas": {
+                "p50": 28.92,
+                "p90_low": 25.92,
+                "p90_high": 31.92
+            },
+            "Kekeruhan": {
+                "p50": 34,
+                "p90_low": 0,
+                "p90_high": 74
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-29T13:19:52.792Z",
+            "Suhu": {
+                "p50": 27.99,
+                "p90_low": 27.19,
+                "p90_high": 28.79
+            },
+            "PH": {
+                "p50": 7.83,
+                "p90_low": 7.53,
+                "p90_high": 8.13
+            },
+            "Salinitas": {
+                "p50": 27.33,
+                "p90_low": 24.33,
+                "p90_high": 30.33
+            },
+            "Kekeruhan": {
+                "p50": 62,
+                "p90_low": 22,
+                "p90_high": 102
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-29T14:19:52.792Z",
+            "Suhu": {
+                "p50": 28.75,
+                "p90_low": 27.95,
+                "p90_high": 29.55
+            },
+            "PH": {
+                "p50": 7.59,
+                "p90_low": 7.29,
+                "p90_high": 7.89
+            },
+            "Salinitas": {
+                "p50": 27.16,
+                "p90_low": 24.16,
+                "p90_high": 30.16
+            },
+            "Kekeruhan": {
+                "p50": 38,
+                "p90_low": 0,
+                "p90_high": 78
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-29T15:19:52.792Z",
+            "Suhu": {
+                "p50": 28.49,
+                "p90_low": 27.69,
+                "p90_high": 29.29
+            },
+            "PH": {
+                "p50": 7.78,
+                "p90_low": 7.48,
+                "p90_high": 8.08
+            },
+            "Salinitas": {
+                "p50": 26.93,
+                "p90_low": 23.93,
+                "p90_high": 29.93
+            },
+            "Kekeruhan": {
+                "p50": 32,
+                "p90_low": 0,
+                "p90_high": 72
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-29T16:19:52.792Z",
+            "Suhu": {
+                "p50": 28.56,
+                "p90_low": 27.76,
+                "p90_high": 29.36
+            },
+            "PH": {
+                "p50": 7.77,
+                "p90_low": 7.47,
+                "p90_high": 8.07
+            },
+            "Salinitas": {
+                "p50": 25.65,
+                "p90_low": 22.65,
+                "p90_high": 28.65
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-29T17:19:52.792Z",
+            "Suhu": {
+                "p50": 28.71,
+                "p90_low": 27.91,
+                "p90_high": 29.51
+            },
+            "PH": {
+                "p50": 8.02,
+                "p90_low": 7.72,
+                "p90_high": 8.32
+            },
+            "Salinitas": {
+                "p50": 26.12,
+                "p90_low": 23.12,
+                "p90_high": 29.12
+            },
+            "Kekeruhan": {
+                "p50": 47,
+                "p90_low": 7,
+                "p90_high": 87
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-29T18:19:52.792Z",
+            "Suhu": {
+                "p50": 29.04,
+                "p90_low": 28.24,
+                "p90_high": 29.84
+            },
+            "PH": {
+                "p50": 7.79,
+                "p90_low": 7.49,
+                "p90_high": 8.09
+            },
+            "Salinitas": {
+                "p50": 29.16,
+                "p90_low": 26.16,
+                "p90_high": 32.16
+            },
+            "Kekeruhan": {
+                "p50": 68,
+                "p90_low": 28,
+                "p90_high": 108
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-29T19:19:52.792Z",
+            "Suhu": {
+                "p50": 28.36,
+                "p90_low": 27.56,
+                "p90_high": 29.16
+            },
+            "PH": {
+                "p50": 7.85,
+                "p90_low": 7.55,
+                "p90_high": 8.15
+            },
+            "Salinitas": {
+                "p50": 30.3,
+                "p90_low": 27.3,
+                "p90_high": 33.3
+            },
+            "Kekeruhan": {
+                "p50": 34,
+                "p90_low": 0,
+                "p90_high": 74
+            },
+            "risk_index": 0.8,
+            "risk_label": "Buruk"
+        },
+        {
+            "ts": "2025-08-29T20:19:52.792Z",
+            "Suhu": {
+                "p50": 28.48,
+                "p90_low": 27.68,
+                "p90_high": 29.28
+            },
+            "PH": {
+                "p50": 7.57,
+                "p90_low": 7.27,
+                "p90_high": 7.87
+            },
+            "Salinitas": {
+                "p50": 29.59,
+                "p90_low": 26.59,
+                "p90_high": 32.59
+            },
+            "Kekeruhan": {
+                "p50": 66,
+                "p90_low": 26,
+                "p90_high": 106
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-29T21:19:52.792Z",
+            "Suhu": {
+                "p50": 28.72,
+                "p90_low": 27.92,
+                "p90_high": 29.52
+            },
+            "PH": {
+                "p50": 7.7,
+                "p90_low": 7.4,
+                "p90_high": 8
+            },
+            "Salinitas": {
+                "p50": 26.53,
+                "p90_low": 23.53,
+                "p90_high": 29.53
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-29T22:19:52.792Z",
+            "Suhu": {
+                "p50": 27.8,
+                "p90_low": 27,
+                "p90_high": 28.6
+            },
+            "PH": {
+                "p50": 7.57,
+                "p90_low": 7.27,
+                "p90_high": 7.87
+            },
+            "Salinitas": {
+                "p50": 26.61,
+                "p90_low": 23.61,
+                "p90_high": 29.61
+            },
+            "Kekeruhan": {
+                "p50": 48,
+                "p90_low": 8,
+                "p90_high": 88
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-29T23:19:52.792Z",
+            "Suhu": {
+                "p50": 27.84,
+                "p90_low": 27.04,
+                "p90_high": 28.64
+            },
+            "PH": {
+                "p50": 7.86,
+                "p90_low": 7.56,
+                "p90_high": 8.16
+            },
+            "Salinitas": {
+                "p50": 26.35,
+                "p90_low": 23.35,
+                "p90_high": 29.35
+            },
+            "Kekeruhan": {
+                "p50": 67,
+                "p90_low": 27,
+                "p90_high": 107
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-30T00:19:52.792Z",
+            "Suhu": {
+                "p50": 28.08,
+                "p90_low": 27.28,
+                "p90_high": 28.88
+            },
+            "PH": {
+                "p50": 7.77,
+                "p90_low": 7.47,
+                "p90_high": 8.07
+            },
+            "Salinitas": {
+                "p50": 25.79,
+                "p90_low": 22.79,
+                "p90_high": 28.79
+            },
+            "Kekeruhan": {
+                "p50": 39,
+                "p90_low": 0,
+                "p90_high": 79
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-30T01:19:52.792Z",
+            "Suhu": {
+                "p50": 28.13,
+                "p90_low": 27.33,
+                "p90_high": 28.93
+            },
+            "PH": {
+                "p50": 7.57,
+                "p90_low": 7.27,
+                "p90_high": 7.87
+            },
+            "Salinitas": {
+                "p50": 29.91,
+                "p90_low": 26.91,
+                "p90_high": 32.91
+            },
+            "Kekeruhan": {
+                "p50": 67,
+                "p90_low": 27,
+                "p90_high": 107
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-30T02:19:52.792Z",
+            "Suhu": {
+                "p50": 28.05,
+                "p90_low": 27.25,
+                "p90_high": 28.85
+            },
+            "PH": {
+                "p50": 7.8,
+                "p90_low": 7.5,
+                "p90_high": 8.1
+            },
+            "Salinitas": {
+                "p50": 30.32,
+                "p90_low": 27.32,
+                "p90_high": 33.32
+            },
+            "Kekeruhan": {
+                "p50": 51,
+                "p90_low": 11,
+                "p90_high": 91
+            },
+            "risk_index": 0.8,
+            "risk_label": "Buruk"
+        },
+        {
+            "ts": "2025-08-30T03:19:52.792Z",
+            "Suhu": {
+                "p50": 27.94,
+                "p90_low": 27.14,
+                "p90_high": 28.74
+            },
+            "PH": {
+                "p50": 7.8,
+                "p90_low": 7.5,
+                "p90_high": 8.1
+            },
+            "Salinitas": {
+                "p50": 30.24,
+                "p90_low": 27.24,
+                "p90_high": 33.24
+            },
+            "Kekeruhan": {
+                "p50": 43,
+                "p90_low": 3,
+                "p90_high": 83
+            },
+            "risk_index": 0.8,
+            "risk_label": "Buruk"
+        },
+        {
+            "ts": "2025-08-30T04:19:52.792Z",
+            "Suhu": {
+                "p50": 28.81,
+                "p90_low": 28.01,
+                "p90_high": 29.61
+            },
+            "PH": {
+                "p50": 7.79,
+                "p90_low": 7.49,
+                "p90_high": 8.09
+            },
+            "Salinitas": {
+                "p50": 27.2,
+                "p90_low": 24.2,
+                "p90_high": 30.2
+            },
+            "Kekeruhan": {
+                "p50": 70,
+                "p90_low": 30,
+                "p90_high": 110
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-30T05:19:52.792Z",
+            "Suhu": {
+                "p50": 28.07,
+                "p90_low": 27.27,
+                "p90_high": 28.87
+            },
+            "PH": {
+                "p50": 7.69,
+                "p90_low": 7.39,
+                "p90_high": 7.99
+            },
+            "Salinitas": {
+                "p50": 30.47,
+                "p90_low": 27.47,
+                "p90_high": 33.47
+            },
+            "Kekeruhan": {
+                "p50": 57,
+                "p90_low": 17,
+                "p90_high": 97
+            },
+            "risk_index": 0.8,
+            "risk_label": "Buruk"
+        },
+        {
+            "ts": "2025-08-30T06:19:52.792Z",
+            "Suhu": {
+                "p50": 28.41,
+                "p90_low": 27.61,
+                "p90_high": 29.21
+            },
+            "PH": {
+                "p50": 8.03,
+                "p90_low": 7.73,
+                "p90_high": 8.33
+            },
+            "Salinitas": {
+                "p50": 27.86,
+                "p90_low": 24.86,
+                "p90_high": 30.86
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-30T07:19:52.792Z",
+            "Suhu": {
+                "p50": 28.59,
+                "p90_low": 27.79,
+                "p90_high": 29.39
+            },
+            "PH": {
+                "p50": 7.6,
+                "p90_low": 7.3,
+                "p90_high": 7.9
+            },
+            "Salinitas": {
+                "p50": 27.91,
+                "p90_low": 24.91,
+                "p90_high": 30.91
+            },
+            "Kekeruhan": {
+                "p50": 49,
+                "p90_low": 9,
+                "p90_high": 89
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-30T08:19:52.792Z",
+            "Suhu": {
+                "p50": 29,
+                "p90_low": 28.2,
+                "p90_high": 29.8
+            },
+            "PH": {
+                "p50": 7.88,
+                "p90_low": 7.58,
+                "p90_high": 8.18
+            },
+            "Salinitas": {
+                "p50": 28.06,
+                "p90_low": 25.06,
+                "p90_high": 31.06
+            },
+            "Kekeruhan": {
+                "p50": 65,
+                "p90_low": 25,
+                "p90_high": 105
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-30T09:19:52.792Z",
+            "Suhu": {
+                "p50": 27.71,
+                "p90_low": 26.91,
+                "p90_high": 28.51
+            },
+            "PH": {
+                "p50": 7.57,
+                "p90_low": 7.27,
+                "p90_high": 7.87
+            },
+            "Salinitas": {
+                "p50": 29.17,
+                "p90_low": 26.17,
+                "p90_high": 32.17
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-30T10:19:52.792Z",
+            "Suhu": {
+                "p50": 28.08,
+                "p90_low": 27.28,
+                "p90_high": 28.88
+            },
+            "PH": {
+                "p50": 8.01,
+                "p90_low": 7.71,
+                "p90_high": 8.31
+            },
+            "Salinitas": {
+                "p50": 27.74,
+                "p90_low": 24.74,
+                "p90_high": 30.74
+            },
+            "Kekeruhan": {
+                "p50": 65,
+                "p90_low": 25,
+                "p90_high": 105
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-30T11:19:52.792Z",
+            "Suhu": {
+                "p50": 27.88,
+                "p90_low": 27.08,
+                "p90_high": 28.68
+            },
+            "PH": {
+                "p50": 7.68,
+                "p90_low": 7.38,
+                "p90_high": 7.98
+            },
+            "Salinitas": {
+                "p50": 29.22,
+                "p90_low": 26.22,
+                "p90_high": 32.22
+            },
+            "Kekeruhan": {
+                "p50": 46,
+                "p90_low": 6,
+                "p90_high": 86
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-30T12:19:52.792Z",
+            "Suhu": {
+                "p50": 28.3,
+                "p90_low": 27.5,
+                "p90_high": 29.1
+            },
+            "PH": {
+                "p50": 7.95,
+                "p90_low": 7.65,
+                "p90_high": 8.25
+            },
+            "Salinitas": {
+                "p50": 26.97,
+                "p90_low": 23.97,
+                "p90_high": 29.97
+            },
+            "Kekeruhan": {
+                "p50": 57,
+                "p90_low": 17,
+                "p90_high": 97
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-30T13:19:52.792Z",
+            "Suhu": {
+                "p50": 28.63,
+                "p90_low": 27.83,
+                "p90_high": 29.43
+            },
+            "PH": {
+                "p50": 8.01,
+                "p90_low": 7.71,
+                "p90_high": 8.31
+            },
+            "Salinitas": {
+                "p50": 29.08,
+                "p90_low": 26.08,
+                "p90_high": 32.08
+            },
+            "Kekeruhan": {
+                "p50": 58,
+                "p90_low": 18,
+                "p90_high": 98
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-30T14:19:52.792Z",
+            "Suhu": {
+                "p50": 28.67,
+                "p90_low": 27.87,
+                "p90_high": 29.47
+            },
+            "PH": {
+                "p50": 7.7,
+                "p90_low": 7.4,
+                "p90_high": 8
+            },
+            "Salinitas": {
+                "p50": 27.85,
+                "p90_low": 24.85,
+                "p90_high": 30.85
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-30T15:19:52.792Z",
+            "Suhu": {
+                "p50": 28.09,
+                "p90_low": 27.29,
+                "p90_high": 28.89
+            },
+            "PH": {
+                "p50": 7.66,
+                "p90_low": 7.36,
+                "p90_high": 7.96
+            },
+            "Salinitas": {
+                "p50": 26.66,
+                "p90_low": 23.66,
+                "p90_high": 29.66
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-30T16:19:52.792Z",
+            "Suhu": {
+                "p50": 28.71,
+                "p90_low": 27.91,
+                "p90_high": 29.51
+            },
+            "PH": {
+                "p50": 7.82,
+                "p90_low": 7.52,
+                "p90_high": 8.12
+            },
+            "Salinitas": {
+                "p50": 28.08,
+                "p90_low": 25.08,
+                "p90_high": 31.08
+            },
+            "Kekeruhan": {
+                "p50": 47,
+                "p90_low": 7,
+                "p90_high": 87
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-30T17:19:52.792Z",
+            "Suhu": {
+                "p50": 28.69,
+                "p90_low": 27.89,
+                "p90_high": 29.49
+            },
+            "PH": {
+                "p50": 7.83,
+                "p90_low": 7.53,
+                "p90_high": 8.13
+            },
+            "Salinitas": {
+                "p50": 30.38,
+                "p90_low": 27.38,
+                "p90_high": 33.38
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.8,
+            "risk_label": "Buruk"
+        },
+        {
+            "ts": "2025-08-30T18:19:52.792Z",
+            "Suhu": {
+                "p50": 28.36,
+                "p90_low": 27.56,
+                "p90_high": 29.16
+            },
+            "PH": {
+                "p50": 7.58,
+                "p90_low": 7.28,
+                "p90_high": 7.88
+            },
+            "Salinitas": {
+                "p50": 27.01,
+                "p90_low": 24.01,
+                "p90_high": 30.01
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-30T19:19:52.792Z",
+            "Suhu": {
+                "p50": 28.35,
+                "p90_low": 27.55,
+                "p90_high": 29.15
+            },
+            "PH": {
+                "p50": 7.76,
+                "p90_low": 7.46,
+                "p90_high": 8.06
+            },
+            "Salinitas": {
+                "p50": 26.98,
+                "p90_low": 23.98,
+                "p90_high": 29.98
+            },
+            "Kekeruhan": {
+                "p50": 55,
+                "p90_low": 15,
+                "p90_high": 95
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-30T20:19:52.792Z",
+            "Suhu": {
+                "p50": 29.09,
+                "p90_low": 28.29,
+                "p90_high": 29.89
+            },
+            "PH": {
+                "p50": 7.7,
+                "p90_low": 7.4,
+                "p90_high": 8
+            },
+            "Salinitas": {
+                "p50": 26.07,
+                "p90_low": 23.07,
+                "p90_high": 29.07
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-30T21:19:52.792Z",
+            "Suhu": {
+                "p50": 28.37,
+                "p90_low": 27.57,
+                "p90_high": 29.17
+            },
+            "PH": {
+                "p50": 7.61,
+                "p90_low": 7.31,
+                "p90_high": 7.91
+            },
+            "Salinitas": {
+                "p50": 27.64,
+                "p90_low": 24.64,
+                "p90_high": 30.64
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-30T22:19:52.792Z",
+            "Suhu": {
+                "p50": 27.99,
+                "p90_low": 27.19,
+                "p90_high": 28.79
+            },
+            "PH": {
+                "p50": 7.92,
+                "p90_low": 7.62,
+                "p90_high": 8.22
+            },
+            "Salinitas": {
+                "p50": 30.42,
+                "p90_low": 27.42,
+                "p90_high": 33.42
+            },
+            "Kekeruhan": {
+                "p50": 67,
+                "p90_low": 27,
+                "p90_high": 107
+            },
+            "risk_index": 0.8,
+            "risk_label": "Buruk"
+        },
+        {
+            "ts": "2025-08-30T23:19:52.792Z",
+            "Suhu": {
+                "p50": 27.71,
+                "p90_low": 26.91,
+                "p90_high": 28.51
+            },
+            "PH": {
+                "p50": 7.63,
+                "p90_low": 7.33,
+                "p90_high": 7.93
+            },
+            "Salinitas": {
+                "p50": 27.32,
+                "p90_low": 24.32,
+                "p90_high": 30.32
+            },
+            "Kekeruhan": {
+                "p50": 45,
+                "p90_low": 5,
+                "p90_high": 85
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-31T00:19:52.792Z",
+            "Suhu": {
+                "p50": 28.94,
+                "p90_low": 28.14,
+                "p90_high": 29.74
+            },
+            "PH": {
+                "p50": 8.03,
+                "p90_low": 7.73,
+                "p90_high": 8.33
+            },
+            "Salinitas": {
+                "p50": 26.9,
+                "p90_low": 23.9,
+                "p90_high": 29.9
+            },
+            "Kekeruhan": {
+                "p50": 59,
+                "p90_low": 19,
+                "p90_high": 99
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-31T01:19:52.792Z",
+            "Suhu": {
+                "p50": 27.82,
+                "p90_low": 27.02,
+                "p90_high": 28.62
+            },
+            "PH": {
+                "p50": 7.66,
+                "p90_low": 7.36,
+                "p90_high": 7.96
+            },
+            "Salinitas": {
+                "p50": 27.26,
+                "p90_low": 24.26,
+                "p90_high": 30.26
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-31T02:19:52.792Z",
+            "Suhu": {
+                "p50": 27.72,
+                "p90_low": 26.92,
+                "p90_high": 28.52
+            },
+            "PH": {
+                "p50": 7.75,
+                "p90_low": 7.45,
+                "p90_high": 8.05
+            },
+            "Salinitas": {
+                "p50": 28.7,
+                "p90_low": 25.7,
+                "p90_high": 31.7
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-31T03:19:52.792Z",
+            "Suhu": {
+                "p50": 28.38,
+                "p90_low": 27.58,
+                "p90_high": 29.18
+            },
+            "PH": {
+                "p50": 7.94,
+                "p90_low": 7.64,
+                "p90_high": 8.24
+            },
+            "Salinitas": {
+                "p50": 26.64,
+                "p90_low": 23.64,
+                "p90_high": 29.64
+            },
+            "Kekeruhan": {
+                "p50": 44,
+                "p90_low": 4,
+                "p90_high": 84
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-31T04:19:52.792Z",
+            "Suhu": {
+                "p50": 28.81,
+                "p90_low": 28.01,
+                "p90_high": 29.61
+            },
+            "PH": {
+                "p50": 7.95,
+                "p90_low": 7.65,
+                "p90_high": 8.25
+            },
+            "Salinitas": {
+                "p50": 26.67,
+                "p90_low": 23.67,
+                "p90_high": 29.67
+            },
+            "Kekeruhan": {
+                "p50": 37,
+                "p90_low": 0,
+                "p90_high": 77
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-31T05:19:52.792Z",
+            "Suhu": {
+                "p50": 28.94,
+                "p90_low": 28.14,
+                "p90_high": 29.74
+            },
+            "PH": {
+                "p50": 7.63,
+                "p90_low": 7.33,
+                "p90_high": 7.93
+            },
+            "Salinitas": {
+                "p50": 29.67,
+                "p90_low": 26.67,
+                "p90_high": 32.67
+            },
+            "Kekeruhan": {
+                "p50": 31,
+                "p90_low": 0,
+                "p90_high": 71
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-31T06:19:52.792Z",
+            "Suhu": {
+                "p50": 28.59,
+                "p90_low": 27.79,
+                "p90_high": 29.39
+            },
+            "PH": {
+                "p50": 8.03,
+                "p90_low": 7.73,
+                "p90_high": 8.33
+            },
+            "Salinitas": {
+                "p50": 28.27,
+                "p90_low": 25.27,
+                "p90_high": 31.27
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-31T07:19:52.792Z",
+            "Suhu": {
+                "p50": 28.72,
+                "p90_low": 27.92,
+                "p90_high": 29.52
+            },
+            "PH": {
+                "p50": 7.83,
+                "p90_low": 7.53,
+                "p90_high": 8.13
+            },
+            "Salinitas": {
+                "p50": 28.4,
+                "p90_low": 25.4,
+                "p90_high": 31.4
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-31T08:19:52.792Z",
+            "Suhu": {
+                "p50": 28.06,
+                "p90_low": 27.26,
+                "p90_high": 28.86
+            },
+            "PH": {
+                "p50": 7.76,
+                "p90_low": 7.46,
+                "p90_high": 8.06
+            },
+            "Salinitas": {
+                "p50": 25.61,
+                "p90_low": 22.61,
+                "p90_high": 28.61
+            },
+            "Kekeruhan": {
+                "p50": 58,
+                "p90_low": 18,
+                "p90_high": 98
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-31T09:19:52.792Z",
+            "Suhu": {
+                "p50": 28.8,
+                "p90_low": 28,
+                "p90_high": 29.6
+            },
+            "PH": {
+                "p50": 8.04,
+                "p90_low": 7.74,
+                "p90_high": 8.34
+            },
+            "Salinitas": {
+                "p50": 28.6,
+                "p90_low": 25.6,
+                "p90_high": 31.6
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-31T10:19:52.792Z",
+            "Suhu": {
+                "p50": 28.83,
+                "p90_low": 28.03,
+                "p90_high": 29.63
+            },
+            "PH": {
+                "p50": 7.65,
+                "p90_low": 7.35,
+                "p90_high": 7.95
+            },
+            "Salinitas": {
+                "p50": 28.8,
+                "p90_low": 25.8,
+                "p90_high": 31.8
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-31T11:19:52.792Z",
+            "Suhu": {
+                "p50": 27.94,
+                "p90_low": 27.14,
+                "p90_high": 28.74
+            },
+            "PH": {
+                "p50": 8,
+                "p90_low": 7.7,
+                "p90_high": 8.3
+            },
+            "Salinitas": {
+                "p50": 28.61,
+                "p90_low": 25.61,
+                "p90_high": 31.61
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-31T12:19:52.792Z",
+            "Suhu": {
+                "p50": 28.27,
+                "p90_low": 27.47,
+                "p90_high": 29.07
+            },
+            "PH": {
+                "p50": 7.61,
+                "p90_low": 7.31,
+                "p90_high": 7.91
+            },
+            "Salinitas": {
+                "p50": 26.65,
+                "p90_low": 23.65,
+                "p90_high": 29.65
+            },
+            "Kekeruhan": {
+                "p50": 59,
+                "p90_low": 19,
+                "p90_high": 99
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-31T13:19:52.792Z",
+            "Suhu": {
+                "p50": 27.92,
+                "p90_low": 27.12,
+                "p90_high": 28.72
+            },
+            "PH": {
+                "p50": 7.57,
+                "p90_low": 7.27,
+                "p90_high": 7.87
+            },
+            "Salinitas": {
+                "p50": 26.75,
+                "p90_low": 23.75,
+                "p90_high": 29.75
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-31T14:19:52.792Z",
+            "Suhu": {
+                "p50": 28.48,
+                "p90_low": 27.68,
+                "p90_high": 29.28
+            },
+            "PH": {
+                "p50": 7.59,
+                "p90_low": 7.29,
+                "p90_high": 7.89
+            },
+            "Salinitas": {
+                "p50": 26.56,
+                "p90_low": 23.56,
+                "p90_high": 29.56
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-31T15:19:52.792Z",
+            "Suhu": {
+                "p50": 28.34,
+                "p90_low": 27.54,
+                "p90_high": 29.14
+            },
+            "PH": {
+                "p50": 7.76,
+                "p90_low": 7.46,
+                "p90_high": 8.06
+            },
+            "Salinitas": {
+                "p50": 29.03,
+                "p90_low": 26.03,
+                "p90_high": 32.03
+            },
+            "Kekeruhan": {
+                "p50": 70,
+                "p90_low": 30,
+                "p90_high": 110
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-31T16:19:52.792Z",
+            "Suhu": {
+                "p50": 28.71,
+                "p90_low": 27.91,
+                "p90_high": 29.51
+            },
+            "PH": {
+                "p50": 7.8,
+                "p90_low": 7.5,
+                "p90_high": 8.1
+            },
+            "Salinitas": {
+                "p50": 26.73,
+                "p90_low": 23.73,
+                "p90_high": 29.73
+            },
+            "Kekeruhan": {
+                "p50": 65,
+                "p90_low": 25,
+                "p90_high": 105
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-31T17:19:52.792Z",
+            "Suhu": {
+                "p50": 28.59,
+                "p90_low": 27.79,
+                "p90_high": 29.39
+            },
+            "PH": {
+                "p50": 8.02,
+                "p90_low": 7.72,
+                "p90_high": 8.32
+            },
+            "Salinitas": {
+                "p50": 26.66,
+                "p90_low": 23.66,
+                "p90_high": 29.66
+            },
+            "Kekeruhan": {
+                "p50": 51,
+                "p90_low": 11,
+                "p90_high": 91
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-31T18:19:52.792Z",
+            "Suhu": {
+                "p50": 27.98,
+                "p90_low": 27.18,
+                "p90_high": 28.78
+            },
+            "PH": {
+                "p50": 7.92,
+                "p90_low": 7.62,
+                "p90_high": 8.22
+            },
+            "Salinitas": {
+                "p50": 26.51,
+                "p90_low": 23.51,
+                "p90_high": 29.51
+            },
+            "Kekeruhan": {
+                "p50": 36,
+                "p90_low": 0,
+                "p90_high": 76
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-31T19:19:52.792Z",
+            "Suhu": {
+                "p50": 28.48,
+                "p90_low": 27.68,
+                "p90_high": 29.28
+            },
+            "PH": {
+                "p50": 7.67,
+                "p90_low": 7.37,
+                "p90_high": 7.97
+            },
+            "Salinitas": {
+                "p50": 26.73,
+                "p90_low": 23.73,
+                "p90_high": 29.73
+            },
+            "Kekeruhan": {
+                "p50": 38,
+                "p90_low": 0,
+                "p90_high": 78
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-31T20:19:52.792Z",
+            "Suhu": {
+                "p50": 28.58,
+                "p90_low": 27.78,
+                "p90_high": 29.38
+            },
+            "PH": {
+                "p50": 7.92,
+                "p90_low": 7.62,
+                "p90_high": 8.22
+            },
+            "Salinitas": {
+                "p50": 28.2,
+                "p90_low": 25.2,
+                "p90_high": 31.2
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-31T21:19:52.792Z",
+            "Suhu": {
+                "p50": 28.92,
+                "p90_low": 28.12,
+                "p90_high": 29.72
+            },
+            "PH": {
+                "p50": 7.86,
+                "p90_low": 7.56,
+                "p90_high": 8.16
+            },
+            "Salinitas": {
+                "p50": 26.27,
+                "p90_low": 23.27,
+                "p90_high": 29.27
+            },
+            "Kekeruhan": {
+                "p50": 61,
+                "p90_low": 21,
+                "p90_high": 101
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-08-31T22:19:52.792Z",
+            "Suhu": {
+                "p50": 29.07,
+                "p90_low": 28.27,
+                "p90_high": 29.87
+            },
+            "PH": {
+                "p50": 7.88,
+                "p90_low": 7.58,
+                "p90_high": 8.18
+            },
+            "Salinitas": {
+                "p50": 30.45,
+                "p90_low": 27.45,
+                "p90_high": 33.45
+            },
+            "Kekeruhan": {
+                "p50": 66,
+                "p90_low": 26,
+                "p90_high": 106
+            },
+            "risk_index": 0.8,
+            "risk_label": "Buruk"
+        },
+        {
+            "ts": "2025-08-31T23:19:52.792Z",
+            "Suhu": {
+                "p50": 28.25,
+                "p90_low": 27.45,
+                "p90_high": 29.05
+            },
+            "PH": {
+                "p50": 7.98,
+                "p90_low": 7.68,
+                "p90_high": 8.28
+            },
+            "Salinitas": {
+                "p50": 26.54,
+                "p90_low": 23.54,
+                "p90_high": 29.54
+            },
+            "Kekeruhan": {
+                "p50": 37,
+                "p90_low": 0,
+                "p90_high": 77
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-09-01T00:19:52.792Z",
+            "Suhu": {
+                "p50": 28.48,
+                "p90_low": 27.68,
+                "p90_high": 29.28
+            },
+            "PH": {
+                "p50": 7.99,
+                "p90_low": 7.69,
+                "p90_high": 8.29
+            },
+            "Salinitas": {
+                "p50": 29.28,
+                "p90_low": 26.28,
+                "p90_high": 32.28
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-09-01T01:19:52.792Z",
+            "Suhu": {
+                "p50": 28.3,
+                "p90_low": 27.5,
+                "p90_high": 29.1
+            },
+            "PH": {
+                "p50": 7.58,
+                "p90_low": 7.28,
+                "p90_high": 7.88
+            },
+            "Salinitas": {
+                "p50": 28.24,
+                "p90_low": 25.24,
+                "p90_high": 31.24
+            },
+            "Kekeruhan": {
+                "p50": 57,
+                "p90_low": 17,
+                "p90_high": 97
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-09-01T02:19:52.792Z",
+            "Suhu": {
+                "p50": 28.5,
+                "p90_low": 27.7,
+                "p90_high": 29.3
+            },
+            "PH": {
+                "p50": 7.59,
+                "p90_low": 7.29,
+                "p90_high": 7.89
+            },
+            "Salinitas": {
+                "p50": 27.99,
+                "p90_low": 24.99,
+                "p90_high": 30.99
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-09-01T03:19:52.792Z",
+            "Suhu": {
+                "p50": 28.53,
+                "p90_low": 27.73,
+                "p90_high": 29.33
+            },
+            "PH": {
+                "p50": 7.77,
+                "p90_low": 7.47,
+                "p90_high": 8.07
+            },
+            "Salinitas": {
+                "p50": 29.04,
+                "p90_low": 26.04,
+                "p90_high": 32.04
+            },
+            "Kekeruhan": {
+                "p50": 37,
+                "p90_low": 0,
+                "p90_high": 77
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-09-01T04:19:52.792Z",
+            "Suhu": {
+                "p50": 27.86,
+                "p90_low": 27.06,
+                "p90_high": 28.66
+            },
+            "PH": {
+                "p50": 7.67,
+                "p90_low": 7.37,
+                "p90_high": 7.97
+            },
+            "Salinitas": {
+                "p50": 28.56,
+                "p90_low": 25.56,
+                "p90_high": 31.56
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-09-01T05:19:52.792Z",
+            "Suhu": {
+                "p50": 28.65,
+                "p90_low": 27.85,
+                "p90_high": 29.45
+            },
+            "PH": {
+                "p50": 8.01,
+                "p90_low": 7.71,
+                "p90_high": 8.31
+            },
+            "Salinitas": {
+                "p50": 28.06,
+                "p90_low": 25.06,
+                "p90_high": 31.06
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-09-01T06:19:52.792Z",
+            "Suhu": {
+                "p50": 28.25,
+                "p90_low": 27.45,
+                "p90_high": 29.05
+            },
+            "PH": {
+                "p50": 7.71,
+                "p90_low": 7.41,
+                "p90_high": 8.01
+            },
+            "Salinitas": {
+                "p50": 29.87,
+                "p90_low": 26.87,
+                "p90_high": 32.87
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-09-01T07:19:52.792Z",
+            "Suhu": {
+                "p50": 29.07,
+                "p90_low": 28.27,
+                "p90_high": 29.87
+            },
+            "PH": {
+                "p50": 7.95,
+                "p90_low": 7.65,
+                "p90_high": 8.25
+            },
+            "Salinitas": {
+                "p50": 30.17,
+                "p90_low": 27.17,
+                "p90_high": 33.17
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.8,
+            "risk_label": "Buruk"
+        },
+        {
+            "ts": "2025-09-01T08:19:52.792Z",
+            "Suhu": {
+                "p50": 28.75,
+                "p90_low": 27.95,
+                "p90_high": 29.55
+            },
+            "PH": {
+                "p50": 8.02,
+                "p90_low": 7.72,
+                "p90_high": 8.32
+            },
+            "Salinitas": {
+                "p50": 27.51,
+                "p90_low": 24.51,
+                "p90_high": 30.51
+            },
+            "Kekeruhan": {
+                "p50": 53,
+                "p90_low": 13,
+                "p90_high": 93
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-09-01T09:19:52.792Z",
+            "Suhu": {
+                "p50": 27.87,
+                "p90_low": 27.07,
+                "p90_high": 28.67
+            },
+            "PH": {
+                "p50": 7.58,
+                "p90_low": 7.28,
+                "p90_high": 7.88
+            },
+            "Salinitas": {
+                "p50": 28.73,
+                "p90_low": 25.73,
+                "p90_high": 31.73
+            },
+            "Kekeruhan": {
+                "p50": 53,
+                "p90_low": 13,
+                "p90_high": 93
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-09-01T10:19:52.792Z",
+            "Suhu": {
+                "p50": 28.74,
+                "p90_low": 27.94,
+                "p90_high": 29.54
+            },
+            "PH": {
+                "p50": 7.79,
+                "p90_low": 7.49,
+                "p90_high": 8.09
+            },
+            "Salinitas": {
+                "p50": 28.53,
+                "p90_low": 25.53,
+                "p90_high": 31.53
+            },
+            "Kekeruhan": {
+                "p50": 60,
+                "p90_low": 20,
+                "p90_high": 100
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-09-01T11:19:52.792Z",
+            "Suhu": {
+                "p50": 28.83,
+                "p90_low": 28.03,
+                "p90_high": 29.63
+            },
+            "PH": {
+                "p50": 7.69,
+                "p90_low": 7.39,
+                "p90_high": 7.99
+            },
+            "Salinitas": {
+                "p50": 28.3,
+                "p90_low": 25.3,
+                "p90_high": 31.3
+            },
+            "Kekeruhan": {
+                "p50": 44,
+                "p90_low": 4,
+                "p90_high": 84
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-09-01T12:19:52.792Z",
+            "Suhu": {
+                "p50": 28.68,
+                "p90_low": 27.88,
+                "p90_high": 29.48
+            },
+            "PH": {
+                "p50": 7.88,
+                "p90_low": 7.58,
+                "p90_high": 8.18
+            },
+            "Salinitas": {
+                "p50": 29.77,
+                "p90_low": 26.77,
+                "p90_high": 32.77
+            },
+            "Kekeruhan": {
+                "p50": 56,
+                "p90_low": 16,
+                "p90_high": 96
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-09-01T13:19:52.792Z",
+            "Suhu": {
+                "p50": 28.54,
+                "p90_low": 27.74,
+                "p90_high": 29.34
+            },
+            "PH": {
+                "p50": 7.61,
+                "p90_low": 7.31,
+                "p90_high": 7.91
+            },
+            "Salinitas": {
+                "p50": 27.17,
+                "p90_low": 24.17,
+                "p90_high": 30.17
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-09-01T14:19:52.792Z",
+            "Suhu": {
+                "p50": 29.1,
+                "p90_low": 28.3,
+                "p90_high": 29.9
+            },
+            "PH": {
+                "p50": 7.72,
+                "p90_low": 7.42,
+                "p90_high": 8.02
+            },
+            "Salinitas": {
+                "p50": 26.09,
+                "p90_low": 23.09,
+                "p90_high": 29.09
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-09-01T15:19:52.792Z",
+            "Suhu": {
+                "p50": 28.66,
+                "p90_low": 27.86,
+                "p90_high": 29.46
+            },
+            "PH": {
+                "p50": 7.6,
+                "p90_low": 7.3,
+                "p90_high": 7.9
+            },
+            "Salinitas": {
+                "p50": 30.23,
+                "p90_low": 27.23,
+                "p90_high": 33.23
+            },
+            "Kekeruhan": {
+                "p50": 38,
+                "p90_low": 0,
+                "p90_high": 78
+            },
+            "risk_index": 0.8,
+            "risk_label": "Buruk"
+        },
+        {
+            "ts": "2025-09-01T16:19:52.792Z",
+            "Suhu": {
+                "p50": 28.9,
+                "p90_low": 28.1,
+                "p90_high": 29.7
+            },
+            "PH": {
+                "p50": 7.57,
+                "p90_low": 7.27,
+                "p90_high": 7.87
+            },
+            "Salinitas": {
+                "p50": 29.04,
+                "p90_low": 26.04,
+                "p90_high": 32.04
+            },
+            "Kekeruhan": {
+                "p50": 70,
+                "p90_low": 30,
+                "p90_high": 110
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-09-01T17:19:52.792Z",
+            "Suhu": {
+                "p50": 28.61,
+                "p90_low": 27.81,
+                "p90_high": 29.41
+            },
+            "PH": {
+                "p50": 7.64,
+                "p90_low": 7.34,
+                "p90_high": 7.94
+            },
+            "Salinitas": {
+                "p50": 27.28,
+                "p90_low": 24.28,
+                "p90_high": 30.28
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-09-01T18:19:52.792Z",
+            "Suhu": {
+                "p50": 28.17,
+                "p90_low": 27.37,
+                "p90_high": 28.97
+            },
+            "PH": {
+                "p50": 7.89,
+                "p90_low": 7.59,
+                "p90_high": 8.19
+            },
+            "Salinitas": {
+                "p50": 27.46,
+                "p90_low": 24.46,
+                "p90_high": 30.46
+            },
+            "Kekeruhan": {
+                "p50": 71,
+                "p90_low": 31,
+                "p90_high": 111
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-09-01T19:19:52.792Z",
+            "Suhu": {
+                "p50": 28.91,
+                "p90_low": 28.11,
+                "p90_high": 29.71
+            },
+            "PH": {
+                "p50": 7.94,
+                "p90_low": 7.64,
+                "p90_high": 8.24
+            },
+            "Salinitas": {
+                "p50": 28.42,
+                "p90_low": 25.42,
+                "p90_high": 31.42
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-09-01T20:19:52.792Z",
+            "Suhu": {
+                "p50": 28.15,
+                "p90_low": 27.35,
+                "p90_high": 28.95
+            },
+            "PH": {
+                "p50": 7.96,
+                "p90_low": 7.66,
+                "p90_high": 8.26
+            },
+            "Salinitas": {
+                "p50": 29.77,
+                "p90_low": 26.77,
+                "p90_high": 32.77
+            },
+            "Kekeruhan": {
+                "p50": 32,
+                "p90_low": 0,
+                "p90_high": 72
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-09-01T21:19:52.792Z",
+            "Suhu": {
+                "p50": 27.96,
+                "p90_low": 27.16,
+                "p90_high": 28.76
+            },
+            "PH": {
+                "p50": 7.75,
+                "p90_low": 7.45,
+                "p90_high": 8.05
+            },
+            "Salinitas": {
+                "p50": 27.16,
+                "p90_low": 24.16,
+                "p90_high": 30.16
+            },
+            "Kekeruhan": {
+                "p50": 58,
+                "p90_low": 18,
+                "p90_high": 98
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-09-01T22:19:52.792Z",
+            "Suhu": {
+                "p50": 28.64,
+                "p90_low": 27.84,
+                "p90_high": 29.44
+            },
+            "PH": {
+                "p50": 7.66,
+                "p90_low": 7.36,
+                "p90_high": 7.96
+            },
+            "Salinitas": {
+                "p50": 26.25,
+                "p90_low": 23.25,
+                "p90_high": 29.25
+            },
+            "Kekeruhan": {
+                "p50": 43,
+                "p90_low": 3,
+                "p90_high": 83
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-09-01T23:19:52.792Z",
+            "Suhu": {
+                "p50": 29.06,
+                "p90_low": 28.26,
+                "p90_high": 29.86
+            },
+            "PH": {
+                "p50": 7.71,
+                "p90_low": 7.41,
+                "p90_high": 8.01
+            },
+            "Salinitas": {
+                "p50": 26.24,
+                "p90_low": 23.24,
+                "p90_high": 29.24
+            },
+            "Kekeruhan": {
+                "p50": 55,
+                "p90_low": 15,
+                "p90_high": 95
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-09-02T00:19:52.792Z",
+            "Suhu": {
+                "p50": 29.07,
+                "p90_low": 28.27,
+                "p90_high": 29.87
+            },
+            "PH": {
+                "p50": 7.63,
+                "p90_low": 7.33,
+                "p90_high": 7.93
+            },
+            "Salinitas": {
+                "p50": 27.08,
+                "p90_low": 24.08,
+                "p90_high": 30.08
+            },
+            "Kekeruhan": {
+                "p50": 57,
+                "p90_low": 17,
+                "p90_high": 97
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-09-02T01:19:52.792Z",
+            "Suhu": {
+                "p50": 28.24,
+                "p90_low": 27.44,
+                "p90_high": 29.04
+            },
+            "PH": {
+                "p50": 7.9,
+                "p90_low": 7.6,
+                "p90_high": 8.2
+            },
+            "Salinitas": {
+                "p50": 29.68,
+                "p90_low": 26.68,
+                "p90_high": 32.68
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-09-02T02:19:52.792Z",
+            "Suhu": {
+                "p50": 28.47,
+                "p90_low": 27.67,
+                "p90_high": 29.27
+            },
+            "PH": {
+                "p50": 7.98,
+                "p90_low": 7.68,
+                "p90_high": 8.28
+            },
+            "Salinitas": {
+                "p50": 27.45,
+                "p90_low": 24.45,
+                "p90_high": 30.45
+            },
+            "Kekeruhan": {
+                "p50": 48,
+                "p90_low": 8,
+                "p90_high": 88
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-09-02T03:19:52.792Z",
+            "Suhu": {
+                "p50": 28.42,
+                "p90_low": 27.62,
+                "p90_high": 29.22
+            },
+            "PH": {
+                "p50": 7.69,
+                "p90_low": 7.39,
+                "p90_high": 7.99
+            },
+            "Salinitas": {
+                "p50": 26.81,
+                "p90_low": 23.81,
+                "p90_high": 29.81
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-09-02T04:19:52.792Z",
+            "Suhu": {
+                "p50": 27.72,
+                "p90_low": 26.92,
+                "p90_high": 28.52
+            },
+            "PH": {
+                "p50": 7.88,
+                "p90_low": 7.58,
+                "p90_high": 8.18
+            },
+            "Salinitas": {
+                "p50": 30.41,
+                "p90_low": 27.41,
+                "p90_high": 33.41
+            },
+            "Kekeruhan": {
+                "p50": 57,
+                "p90_low": 17,
+                "p90_high": 97
+            },
+            "risk_index": 0.8,
+            "risk_label": "Buruk"
+        },
+        {
+            "ts": "2025-09-02T05:19:52.792Z",
+            "Suhu": {
+                "p50": 28.94,
+                "p90_low": 28.14,
+                "p90_high": 29.74
+            },
+            "PH": {
+                "p50": 7.56,
+                "p90_low": 7.26,
+                "p90_high": 7.86
+            },
+            "Salinitas": {
+                "p50": 28.74,
+                "p90_low": 25.74,
+                "p90_high": 31.74
+            },
+            "Kekeruhan": {
+                "p50": 50,
+                "p90_low": 10,
+                "p90_high": 90
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-09-02T06:19:52.792Z",
+            "Suhu": {
+                "p50": 28.05,
+                "p90_low": 27.25,
+                "p90_high": 28.85
+            },
+            "PH": {
+                "p50": 7.75,
+                "p90_low": 7.45,
+                "p90_high": 8.05
+            },
+            "Salinitas": {
+                "p50": 26,
+                "p90_low": 23,
+                "p90_high": 29
+            },
+            "Kekeruhan": {
+                "p50": 69,
+                "p90_low": 29,
+                "p90_high": 109
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-09-02T07:19:52.792Z",
+            "Suhu": {
+                "p50": 27.95,
+                "p90_low": 27.15,
+                "p90_high": 28.75
+            },
+            "PH": {
+                "p50": 7.74,
+                "p90_low": 7.44,
+                "p90_high": 8.04
+            },
+            "Salinitas": {
+                "p50": 27.87,
+                "p90_low": 24.87,
+                "p90_high": 30.87
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-09-02T08:19:52.792Z",
+            "Suhu": {
+                "p50": 28.96,
+                "p90_low": 28.16,
+                "p90_high": 29.76
+            },
+            "PH": {
+                "p50": 7.65,
+                "p90_low": 7.35,
+                "p90_high": 7.95
+            },
+            "Salinitas": {
+                "p50": 26.13,
+                "p90_low": 23.13,
+                "p90_high": 29.13
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-09-02T09:19:52.792Z",
+            "Suhu": {
+                "p50": 27.87,
+                "p90_low": 27.07,
+                "p90_high": 28.67
+            },
+            "PH": {
+                "p50": 7.71,
+                "p90_low": 7.41,
+                "p90_high": 8.01
+            },
+            "Salinitas": {
+                "p50": 27.48,
+                "p90_low": 24.48,
+                "p90_high": 30.48
+            },
+            "Kekeruhan": {
+                "p50": 41,
+                "p90_low": 1,
+                "p90_high": 81
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        },
+        {
+            "ts": "2025-09-02T10:19:52.792Z",
+            "Suhu": {
+                "p50": 28.8,
+                "p90_low": 28,
+                "p90_high": 29.6
+            },
+            "PH": {
+                "p50": 7.84,
+                "p90_low": 7.54,
+                "p90_high": 8.14
+            },
+            "Salinitas": {
+                "p50": 26.25,
+                "p90_low": 23.25,
+                "p90_high": 29.25
+            },
+            "Kekeruhan": {
+                "p50": 30,
+                "p90_low": 0,
+                "p90_high": 70
+            },
+            "risk_index": 0.5,
+            "risk_label": "Waspada"
+        }
+    ]
+}

@@ -1,10 +1,12 @@
-import { Router } from "express";
-import { forecastDummy } from "../controllers/peramalan.controller.js";
-import { requireAuth } from "../middleware/auth.js";
+// routes/peramalan.routes.js
+import express from "express";
+import { forecast, autoStart, autoStop, autoForecastTick } from "../controllers/peramalan.controller.js";
 
-const r = Router();
+const r = express.Router();
 
-// pakai auth biar konsisten dgn route lain (boleh dilepas kalau perlu publik)
-r.post("/forecast", requireAuth, forecastDummy);
+r.post("/forecast", forecast);
+r.post("/auto/start", autoStart);
+r.post("/auto/stop", autoStop);
+r.post("/auto/tick", autoForecastTick);
 
 export default r;
