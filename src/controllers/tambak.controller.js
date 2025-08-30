@@ -55,7 +55,7 @@ export const statsAverage = async (req, res, next) => {
 
     const avg = (key) => {
       const vals = rows.map(r => r[key]).filter(v => typeof v === "number");
-      return vals.length ? vals.reduce((a,b)=>a+b,0) / vals.length : null;
+      return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : null;
     };
     res.json({
       count: rows.length,
@@ -64,5 +64,46 @@ export const statsAverage = async (req, res, next) => {
       avg_kekeruhan: avg("kekeruhan"),
       avg_salinitas: avg("salinitas")
     });
+  } catch (e) { next(e); }
+};
+
+
+
+export const updateSelf = async (req, res, next) => {
+  try {
+    const idTambak = req.user?.tambakId; // ✅ gunakan "tambakId"
+    if (!idTambak) {
+      return res.status(403).json({
+        message: "Forbidden: akun Anda belum terhubung ke tambak.",
+        code: "NO_TAMBAK_BOUND",
+      });
+    }
+    const tb = await TB_Tambak.findByPk(idTambak);
+    if (!tb) return res.status(404).json({ message: "Tambak tidak ditemukan", code: "TAMBAK_NOT_FOUND" });
+
+    const { Nama, Substrat, Latitude, Longitude } = req.body || {};
+    await tb.update({
+      ...(typeof Nama !== "undefined" && { Nama }),
+      ...(typeof Substrat !== "undefined" && { Substrat }),
+      ...(typeof Latitude !== "undefined" && { Latitude }),
+      ...(typeof Longitude !== "undefined" && { Longitude }),
+    });
+    res.json({ ok: true });
+  } catch (e) { next(e); }
+};
+
+
+// opsi aman: update milik user yang login, tanpa param URL
+export const updateSelfMine = async (req, res, next) => {
+  try {
+    const idTambak = req.user?.tambakId; // ✅ gunakan "tambakId"
+    if (!idTambak) return res.status(403).json({ message: "Forbidden" });
+
+    const data = await TB_Tambak.findOne({ where: { ID_Tambak: idTambak } });
+    if (!data) return res.status(404).json({ message: "Not found" });
+
+    const { Nama, Substrat, Latitude, Longitude } = req.body || {};
+    await data.update({ Nama, Substrat, Latitude, Longitude });
+    res.json({ ok: true });
   } catch (e) { next(e); }
 };

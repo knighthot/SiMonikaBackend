@@ -15,3 +15,9 @@ export const updateUserSchema = z.object({
 });
 
 
+export const updateUserSelfSchema = z.object({
+  body: z.object({
+    Nama_tambak: z.string().min(1).max(100).optional(),
+    Password: z.string().min(6).max(100).optional(),
+  })
+});

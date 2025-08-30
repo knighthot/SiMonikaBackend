@@ -10,8 +10,8 @@ function getMaybeKey() {
 
 const SAFE_RANGE = {
   suhu: { min: 26, max: 34 },
-  ph:   { min: 7,  max: 9  },
-  sal:  { min: 10, max: 30 },
+  ph: { min: 7, max: 9 },
+  sal: { min: 10, max: 30 },
   turb: { max: 200 }
 };
 
@@ -29,8 +29,8 @@ function normForecastRow(p) {
   const PHx = P?.PH ?? P?.pH ?? P?.ph;
   return {
     ts: p?.ts || P?.ts || P?.Timestamp || P?.time || null,
-    Suhu:      asNum(P?.Suhu ?? P?.suhu),
-    PH:        num(PHx && typeof PHx === "object" ? PHx.p50 : PHx),
+    Suhu: asNum(P?.Suhu ?? P?.suhu),
+    PH: num(PHx && typeof PHx === "object" ? PHx.p50 : PHx),
     Salinitas: asNum(P?.Salinitas ?? P?.salinitas),
     Kekeruhan: asNum(P?.Kekeruhan ?? P?.kekeruhan),
     risk_label: p?.risk_label ?? P?.risk_label ?? null,
@@ -41,7 +41,7 @@ function stats(arr) {
   const xs = arr.filter((v) => Number.isFinite(v));
   if (!xs.length) return { count: 0, min: null, max: null, mean: null };
   const s = xs.reduce((a, b) => a + b, 0);
-  return { count: xs.length, min: Math.min(...xs), max: Math.max(...xs), mean: +(s/xs.length).toFixed(2) };
+  return { count: xs.length, min: Math.min(...xs), max: Math.max(...xs), mean: +(s / xs.length).toFixed(2) };
 }
 
 // Ambil input efektif: (tetap)
@@ -97,7 +97,7 @@ function statusFromForecastRow(row) {
   // fallback ke ambang SAFE_RANGE jika risk_label tak ada
   const bad =
     (row.Suhu < SAFE_RANGE.suhu.min || row.Suhu > SAFE_RANGE.suhu.max) ||
-    (row.PH   < SAFE_RANGE.ph.min   || row.PH   > SAFE_RANGE.ph.max)   ||
+    (row.PH < SAFE_RANGE.ph.min || row.PH > SAFE_RANGE.ph.max) ||
     (row.Salinitas < SAFE_RANGE.sal.min || row.Salinitas > SAFE_RANGE.sal.max) ||
     (row.Kekeruhan > SAFE_RANGE.turb.max);
   const near =
@@ -153,19 +153,19 @@ export const aiSummary = async (req, res) => {
     // statistik MIN–MAX p50 untuk BARIS ANGKA
     const stS = stats(fwd.map(r => r.Suhu));
     const stP = stats(fwd.map(r => r.PH));
-    const stSa= stats(fwd.map(r => r.Salinitas));
+    const stSa = stats(fwd.map(r => r.Salinitas));
     const stT = stats(fwd.map(r => r.Kekeruhan));
 
     const fmt = {
-      rng: (s, u="") => (Number.isFinite(s.min) && Number.isFinite(s.max))
-        ? `${s.min.toFixed(u==="NTU"?0:2)}–${s.max.toFixed(u==="NTU"?0:2)}${u ? ` ${u}` : ""}`
+      rng: (s, u = "") => (Number.isFinite(s.min) && Number.isFinite(s.max))
+        ? `${s.min.toFixed(u === "NTU" ? 0 : 2)}–${s.max.toFixed(u === "NTU" ? 0 : 2)}${u ? ` ${u}` : ""}`
         : "NA",
     };
 
     const numbersLine =
-      `Peramalan ${days} hari → ` +
-      `Suhu ${fmt.rng(stS,"°C")}, pH ${fmt.rng(stP)}, ` +
-      `Salinitas ${fmt.rng(stSa," ppt")}, Kekeruhan ${fmt.rng(stT,"NTU")}.`;
+
+      `Suhu ${fmt.rng(stS, "°C")}, pH ${fmt.rng(stP)}, ` +
+      `Salinitas ${fmt.rng(stSa, " ppt")}, Kekeruhan ${fmt.rng(stT, "NTU")}.`;
 
     // coba OpenAI; instruksi: JANGAN sarankan ganti air laut
     const key = (process.env.OPEN_AI_KEY || process.env.OPENAI_API_KEY || null);
@@ -209,8 +209,8 @@ export const aiSummary = async (req, res) => {
         finalStatus === "Baik"
           ? "Kondisi cenderung stabil; lanjutkan pemantauan berkala, jaga aerasi dan beban pakan."
           : finalStatus === "Waspada"
-          ? "Waspada; optimalkan aerasi/sirkulasi, kurangi pakan sementara, cek pH/salinitas harian."
-          : "Risiko tinggi; maksimalkan aerasi, kurangi pakan, gunakan buffering pH/salinitas yang aman.";
+            ? "Waspada; optimalkan aerasi/sirkulasi, kurangi pakan sementara, cek pH/salinitas harian."
+            : "Risiko tinggi; maksimalkan aerasi, kurangi pakan, gunakan buffering pH/salinitas yang aman.";
       content = `${numbersLine} Status ${finalStatus}. ${saran}`;
     }
 

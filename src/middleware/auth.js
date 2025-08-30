@@ -44,8 +44,15 @@ export async function requireAuth(req, res, next) {
 export function requireRole(...roles) {
   return (req, res, next) => {
     if (!req.user) return res.status(401).json({ message: "Unauthorized" });
-    if (!roles.includes(req.user.role))
-      return res.status(403).json({ message: "Forbidden" });
+    if (!roles.includes(req.user.role)) {
+      return res.status(403).json({
+        message: "Forbidden: role tidak diizinkan untuk endpoint ini.",
+        code: "FORBIDDEN_ROLE",
+        need: roles,
+        have: req.user.role,
+        path: req.originalUrl,        // <— bantu deteksi rute mana yang nolak
+      });
+    }
     next();
   };
 }

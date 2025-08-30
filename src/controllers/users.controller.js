@@ -61,3 +61,29 @@ export const remove = async (req, res, next) => {
     res.json({ ok: true });
   } catch (e) { next(e); }
 };
+
+
+// ✅ SELF-UPDATE nama/password
+export const updateMe = async (req, res, next) => {
+  try {
+    const userId = req.user?.id;               // <-- pakai "id" dari middleware
+    if (!userId) return res.status(401).json({
+      message: "Unauthorized: token tidak valid atau user tidak terdeteksi pada request.",
+      code: "AUTH_MISSING_USER"
+    });
+
+    const u = await TB_User.findByPk(userId);
+    if (!u) return res.status(404).json({ message: "User tidak ditemukan", code: "USER_NOT_FOUND" });
+
+    const { Nama_tambak, Password } = req.body || {};
+    const patch = {};
+    if (typeof Nama_tambak !== "undefined") patch.Nama_tambak = Nama_tambak;
+    if (typeof Password !== "undefined" && Password !== "") patch.Password = Password;
+
+    await u.update(patch);
+    res.json({ ok: true });
+  } catch (e) {
+    next(e);
+  }
+};
+
