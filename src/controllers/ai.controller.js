@@ -3,48 +3,61 @@ import dayjs from "dayjs";
 import OpenAI from "openai";
 import { TB_HistoryPeramalan } from "../models/index.js";
 
-/** <- aman: tidak throw kalau key kosong */
+/** Aman: tidak throw kalau key kosong */
 function getMaybeKey() {
   return process.env.OPEN_AI_KEY || process.env.OPENAI_API_KEY || null;
 }
 
+/** Batas aman (laut) */
 const SAFE_RANGE = {
   suhu: { min: 26, max: 34 },
   ph: { min: 7, max: 9 },
   sal: { min: 10, max: 30 },
-  turb: { max: 200 }
+  turb: { max: 200 },
 };
 
 const num = (v) => {
   const n = Number(v);
   return Number.isFinite(n) ? n : null;
 };
+
+/** Normalisasi 1 baris forecast → {ts,Suhu,PH,Salinitas,Kekeruhan,WQI,risk_label}
+ *  - Mendukung data harian HistoryPeramalan: { tanggal, ph, suhu, salinitas, kekeruhan, wqi, ... }
+ *  - Mendukung format lama/dummy: {Parameter:{...}} atau flat termasuk p50
+ */
 function normForecastRow(p) {
-  // dukung format dari dummy forecast: {Suhu:{p50,...}, PH:{...}, Salinitas:{...}, Kekeruhan:{...}, risk_label}
   const P = p?.Parameter ?? p ?? {};
-  const asNum = (v) => {
-    if (v && typeof v === "object") return num(v.p50);
-    return num(v);
-  };
+  const asNum = (v) => (v && typeof v === "object" ? num(v.p50) : num(v));
   const PHx = P?.PH ?? P?.pH ?? P?.ph;
+  const rawTs = p?.ts || P?.ts || P?.Timestamp || P?.time || P?.tanggal || null;
+
   return {
-    ts: p?.ts || P?.ts || P?.Timestamp || P?.time || null,
+    ts: rawTs,
     Suhu: asNum(P?.Suhu ?? P?.suhu),
     PH: num(PHx && typeof PHx === "object" ? PHx.p50 : PHx),
     Salinitas: asNum(P?.Salinitas ?? P?.salinitas),
     Kekeruhan: asNum(P?.Kekeruhan ?? P?.kekeruhan),
+    WQI: asNum(P?.WQI ?? P?.wqi) ?? asNum(p?.WQI ?? p?.wqi),
     risk_label: p?.risk_label ?? P?.risk_label ?? null,
   };
 }
 
 function stats(arr) {
-  const xs = arr.filter((v) => Number.isFinite(v));
+  const xs = (arr || []).filter((v) => Number.isFinite(v));
   if (!xs.length) return { count: 0, min: null, max: null, mean: null };
   const s = xs.reduce((a, b) => a + b, 0);
-  return { count: xs.length, min: Math.min(...xs), max: Math.max(...xs), mean: +(s / xs.length).toFixed(2) };
+  return {
+    count: xs.length,
+    min: Math.min(...xs),
+    max: Math.max(...xs),
+    mean: +(s / xs.length).toFixed(2),
+  };
 }
 
-// Ambil input efektif: (tetap)
+/** Ambil input efektif:
+ *  - Jika body berisi sensor/forecast → pakai langsung.
+ *  - Jika tidak → ambil dari TB_HistoryPeramalan terakhir (Data_Parameter = array harian).
+ */
 async function resolveInputs({ sensor, forecast, ID_Tambak }) {
   if ((sensor && Object.keys(sensor).length) || (forecast && forecast.length)) {
     const sensorNow = {
@@ -57,185 +70,229 @@ async function resolveInputs({ sensor, forecast, ID_Tambak }) {
   }
 
   if (!ID_Tambak) {
-    throw Object.assign(new Error("ID_Tambak is required when sensor/forecast not provided"), { status: 400 });
+    throw Object.assign(
+      new Error("ID_Tambak is required when sensor/forecast not provided"),
+      { status: 400 }
+    );
   }
 
   const row = await TB_HistoryPeramalan.findOne({
-    where: { ID_Tambak: ID_Tambak },
+    where: { ID_Tambak },
     order: [["createdAt", "DESC"]],
-    attributes: ["Data_Parameter", "createdAt"]
+    attributes: ["Data_Parameter", "createdAt"],
   });
   if (!row) {
-    throw Object.assign(new Error("No TB_HistoryPeramalan found for this tambak"), { status: 404 });
+    throw Object.assign(
+      new Error("No TB_HistoryPeramalan found for this tambak"),
+      { status: 404 }
+    );
   }
 
-  const DP = row?.Data_Parameter || {};
-  const sl = DP?.sensor_last || DP?.sensor || null;
-
-  const sensorNow = {
-    Suhu: num(sl?.Suhu ?? sl?.suhu) ?? 0,
-    PH: num(sl?.PH ?? sl?.pH ?? sl?.ph) ?? 0,
-    Salinitas: num(sl?.Salinitas ?? sl?.salinitas) ?? 0,
-    Kekeruhan: num(sl?.Kekeruhan ?? sl?.kekeruhan) ?? 0,
-  };
-  const sensorAt = sl?.at || null;
-  const fc = Array.isArray(DP?.forecast) ? DP.forecast : [];
-
+  const DP = row?.Data_Parameter || [];
+  const sensorNow = { Suhu: 0, PH: 0, Salinitas: 0, Kekeruhan: 0 };
+  const sensorAt = null;
+  const fc = Array.isArray(DP) ? DP : [];
   return { sensorNow, sensorAt, forecast: fc, source: "historyperamalan" };
 }
 
-function worstStatus(a, b) {
-  const rank = { Baik: 0, Waspada: 1, Buruk: 2 };
-  return (rank[a] >= rank[b]) ? a : b;
+/** WQI helpers */
+const WQI_RANK = { Tinggi: 0, Waspada: 1, Rendah: 2 };
+function wqiLabel(v) {
+  if (!Number.isFinite(v)) return null;
+  if (v >= 80) return "Tinggi";
+  if (v >= 60) return "Waspada";
+  return "Rendah";
+}
+function worstStatus(a, b, rankMap) {
+  const rank = rankMap || { Baik: 0, Waspada: 1, Buruk: 2 };
+  if (!Object.prototype.hasOwnProperty.call(rank, a)) return b;
+  if (!Object.prototype.hasOwnProperty.call(rank, b)) return a;
+  return rank[b] > rank[a] ? b : a;
 }
 
-// ======== NEW: status dari forecast row (prioritaskan risk_label) ========
-function statusFromForecastRow(row) {
+/** Status via parameter bila WQI tak ada */
+function paramStatus(row) {
   if (row?.risk_label === "Buruk" || row?.risk_label === "Waspada" || row?.risk_label === "Baik") {
     return row.risk_label;
   }
-  // fallback ke ambang SAFE_RANGE jika risk_label tak ada
+  const s = row?.Suhu, p = row?.PH, sa = row?.Salinitas, t = row?.Kekeruhan;
+
   const bad =
-    (row.Suhu < SAFE_RANGE.suhu.min || row.Suhu > SAFE_RANGE.suhu.max) ||
-    (row.PH < SAFE_RANGE.ph.min || row.PH > SAFE_RANGE.ph.max) ||
-    (row.Salinitas < SAFE_RANGE.sal.min || row.Salinitas > SAFE_RANGE.sal.max) ||
-    (row.Kekeruhan > SAFE_RANGE.turb.max);
+    (Number.isFinite(s) && (s < SAFE_RANGE.suhu.min || s > SAFE_RANGE.suhu.max)) ||
+    (Number.isFinite(p) && (p < SAFE_RANGE.ph.min || p > SAFE_RANGE.ph.max)) ||
+    (Number.isFinite(sa) && (sa < SAFE_RANGE.sal.min || sa > SAFE_RANGE.sal.max)) ||
+    (Number.isFinite(t) && (t > SAFE_RANGE.turb.max));
+
   const near =
-    (row.Suhu >= 26 && row.Suhu < 28) || (row.Suhu > 32 && row.Suhu <= 34) ||
-    (row.PH >= 7 && row.PH < 7.5) || (row.PH > 8.5 && row.PH <= 9) ||
-    (row.Salinitas >= 10 && row.Salinitas < 15) || (row.Salinitas > 25 && row.Salinitas <= 30) ||
-    (row.Kekeruhan > 100 && row.Kekeruhan <= 200);
+    (Number.isFinite(s) && ((s >= 26 && s < 28) || (s > 32 && s <= 34))) ||
+    (Number.isFinite(p) && ((p >= 7 && p < 7.5) || (p > 8.5 && p <= 9))) ||
+    (Number.isFinite(sa) && ((sa >= 10 && sa < 15) || (sa > 25 && sa <= 30))) ||
+    (Number.isFinite(t) && (t > 100 && t <= 200));
+
   if (bad) return "Buruk";
   if (near) return "Waspada";
   return "Baik";
 }
 
-// ======== NEW: filter forecast ke depan saja & batasi hari ========
+/** Ambil hanya forecast masa depan & batasi hari; hasil disortir naik */
 function sliceFutureForecast(fcEff, rangeDays = 7) {
   const now = Date.now();
   const days = Math.max(1, Math.min(30, Number(rangeDays) || 7)); // 1..30
   const until = dayjs(now).add(days, "day");
+
   const rows = [];
-  for (const raw of fcEff) {
+  for (const raw of fcEff || []) {
     const r = normForecastRow(raw);
-    const ms = r.ts ? +new Date(r.ts) : NaN;
+    let tsStr = r.ts;
+    if (!tsStr) continue;
+    tsStr = String(tsStr);
+    const ms = tsStr.length === 10 ? +new Date(tsStr + "T00:00:00Z") : +new Date(tsStr);
     if (!Number.isFinite(ms)) continue;
-    if (ms <= now) continue;                 // ← buang masa lalu
-    if (dayjs(ms).isAfter(until)) continue;  // ← batasi max N hari
-    rows.push(r);
+    if (ms <= now) continue;                 // masa lalu skip
+    if (dayjs(ms).isAfter(until)) continue;  // di luar jendela skip
+    rows.push({ ...r, ts: new Date(ms).toISOString() });
   }
+  rows.sort((a, b) => +new Date(a.ts) - +new Date(b.ts));
   return { rows, days };
+}
+
+/** Ringkas penjelasan parameter → frasa kecil */
+function paramPhrase(mean, label) {
+  if (!Number.isFinite(mean)) return `${label} tidak tersedia`;
+  const ok =
+    (label === "pH" && mean >= SAFE_RANGE.ph.min && mean <= SAFE_RANGE.ph.max) ||
+    (label === "suhu" && mean >= SAFE_RANGE.suhu.min && mean <= SAFE_RANGE.suhu.max) ||
+    (label === "salinitas" && mean >= SAFE_RANGE.sal.min && mean <= SAFE_RANGE.sal.max) ||
+    (label === "kekeruhan" && mean <= SAFE_RANGE.turb.max);
+  return ok ? `${label} dalam batas` : `${label} melewati batas`;
+}
+
+/** Potong agar 30–40 kata */
+function clipWords(s, min = 30, max = 40) {
+  const words = s.trim().split(/\s+/);
+  if (words.length <= max && words.length >= min) return s.trim();
+  if (words.length > max) return words.slice(0, max).join(" ").trim();
+  return s.trim();
 }
 
 export const aiSummary = async (req, res) => {
   try {
-    const { sensor, forecast, meta = {}, debug: debugReq, ID_Tambak, range_days, only_forecast } = req.body || {};
+    const { sensor, forecast, meta = {}, debug: debugReq, ID_Tambak, range_days } = req.body || {};
     const wantDebug = Boolean(debugReq ?? req.query?.debug);
 
     const { sensorNow, sensorAt, forecast: fcEff, source } =
       await resolveInputs({ sensor, forecast, ID_Tambak });
 
-    // === gunakan HANYA FORECAST untuk ringkasan ===
-    const { rows: fwd, days } = sliceFutureForecast(fcEff, range_days ?? meta?.range?.days ?? 7);
+    // Pakai HANYA FORECAST untuk ringkasan
+    const { rows: fwd, days } = sliceFutureForecast(
+      fcEff,
+      range_days ?? meta?.range?.days ?? 7
+    );
 
     if (!fwd.length) {
-      return res.status(400).json({ message: "Tidak ada data peramalan ke depan dalam jendela yang diminta." });
+      return res.status(400).json({
+        message: "Tidak ada data peramalan ke depan dalam jendela yang diminta.",
+      });
     }
 
-    // status = agregasi 'terburuk' dalam jendela forecast
-    let fcStatus = "Baik";
-    for (const r of fwd) {
-      fcStatus = worstStatus(fcStatus, statusFromForecastRow(r));
-      if (fcStatus === "Buruk") break;
+    const startTs = fwd[0].ts;
+    const endTs = fwd[fwd.length - 1].ts;
+
+    // ==== STATUS UTAMA dari WQI (bila ada) ====
+    const wqiVals = fwd.map(r => r.WQI).filter(v => Number.isFinite(v));
+    const wqiPerRow = fwd.map(r => wqiLabel(r.WQI));
+    let wqiOverall = "Tinggi"; // default "baik"
+    for (const lab of wqiPerRow) {
+      if (!lab) continue;
+      wqiOverall = worstStatus(wqiOverall, lab, WQI_RANK);
+      if (wqiOverall === "Rendah") break;
     }
-    const finalStatus = fcStatus; // <-- tidak digabung dengan sensor_now
 
-    // statistik MIN–MAX p50 untuk BARIS ANGKA
-    const stS = stats(fwd.map(r => r.Suhu));
-    const stP = stats(fwd.map(r => r.PH));
-    const stSa = stats(fwd.map(r => r.Salinitas));
-    const stT = stats(fwd.map(r => r.Kekeruhan));
+    // Fallback ke parameter jika WQI tidak ada sama sekali
+    if (!wqiVals.length) {
+      let fcParam = "Baik";
+      for (const r of fwd) {
+        fcParam = worstStatus(fcParam, paramStatus(r));
+        if (fcParam === "Buruk") break;
+      }
+      wqiOverall = fcParam === "Buruk" ? "Rendah" : fcParam === "Waspada" ? "Waspada" : "Tinggi";
+    }
 
-    const fmt = {
-      rng: (s, u = "") => (Number.isFinite(s.min) && Number.isFinite(s.max))
-        ? `${s.min.toFixed(u === "NTU" ? 0 : 2)}–${s.max.toFixed(u === "NTU" ? 0 : 2)}${u ? ` ${u}` : ""}`
-        : "NA",
-    };
+    // statistik MIN–MAX/mean untuk info parameter
+    const stS = stats(fwd.map((r) => r.Suhu));
+    const stP = stats(fwd.map((r) => r.PH));
+    const stSa = stats(fwd.map((r) => r.Salinitas));
+    const stT = stats(fwd.map((r) => r.Kekeruhan));
+    const stW = stats(wqiVals);
 
-    const numbersLine =
-
-      `Suhu ${fmt.rng(stS, "°C")}, pH ${fmt.rng(stP)}, ` +
-      `Salinitas ${fmt.rng(stSa, " ppt")}, Kekeruhan ${fmt.rng(stT, "NTU")}.`;
-
-    // coba OpenAI; instruksi: JANGAN sarankan ganti air laut
-    const key = (process.env.OPEN_AI_KEY || process.env.OPENAI_API_KEY || null);
+    // ====== GENERASI TEKS 30–40 kata TANPA PREFIX TANGGAL ======
+    const key = getMaybeKey();
     let content = "";
+    const hints = [
+      `WQI ${Number.isFinite(stW.mean) ? stW.mean : "-"} (${wqiOverall}).`,
+      `Parameter:`,
+      paramPhrase(stP.mean, "pH") + ",",
+      paramPhrase(stS.mean, "suhu") + ",",
+      paramPhrase(stSa.mean, "salinitas") + ",",
+      paramPhrase(stT.mean, "kekeruhan") + ".",
+      `Tindakan mengikuti status ${wqiOverall.toLowerCase()}.`
+    ].join(" ");
+
     if (key) {
       try {
         const openai = new OpenAI({ apiKey: key });
-        const system = [
-          "Kamu asisten kualitas air tambak LAUT (skala besar, sulit mengganti air).",
-          "Jawab ringkas, actionable, Bahasa Indonesia,dan mudah dipahami untuk pemula.",
-          "Batas acuan: suhu 26–34°C, pH 7–9, salinitas 10–30 ppt, kekeruhan ≤200 NTU.",
-          "Output maks 45 kata, SATU paragraf.",
-          "Mulai jawaban dengan BARIS ANGKA yang diberikan.",
-          "JANGAN menyarankan penggantian air; fokus aerasi/sirkulasi, manajemen pakan, shading, buffering pH/salinitas yang aman."
-        ].join(" ");
-        const userPrompt = [
-          `BARIS PARAMETER: ${numbersLine}`,
-          `Status peramalan gabungan: ${finalStatus}.`,
-          "Setelah baris angka, beri 1–2 saran praktis yang relevan untuk lingkungan laut (tanpa ganti air).",
-          "Jangan lebih dari 45 kata."
-        ].join("\n");
+        const system =
+          "Kamu asisten kualitas air tambak LAUT. Tulis 30–40 kata, Bahasa Indonesia. " +
+          "Awali dengan WQI (angka bila ada + label), lalu ringkas kondisi pH, suhu, salinitas, kekeruhan. " +
+          "Jangan sarankan ganti air.";
+        const userPrompt =
+          `DATA:\n` +
+          `WQI mean:${Number.isFinite(stW.mean) ? stW.mean : "-"} Label:${wqiOverall}; ` +
+          `pH mean:${stP.mean}; Suhu mean:${stS.mean}; Salinitas mean:${stSa.mean}; Kekeruhan mean:${stT.mean}.\n` +
+          "Tulis satu paragraf 30–40 kata, tanpa tanggal/prefix. Fokus status WQI lalu parameter.";
 
         const completion = await openai.chat.completions.create({
           model: "gpt-3.5-turbo-0125",
           temperature: 0.2,
           messages: [
             { role: "system", content: system },
-            { role: "user", content: userPrompt }
-          ]
+            { role: "user", content: userPrompt },
+          ],
         });
-        content = completion.choices?.[0]?.message?.content?.trim() || "";
+        content = (completion?.choices?.[0]?.message?.content || "").trim();
+        content = clipWords(content, 30, 40);
       } catch (e) {
         console.error("OpenAI error:", e?.message || e);
       }
     }
 
-    // fallback deterministik (tanpa OpenAI / gagal)
-    const hasNumbers = content && content.includes("Peramalan");
-    if (!hasNumbers) {
-      const saran =
-        finalStatus === "Baik"
-          ? "Kondisi cenderung stabil; lanjutkan pemantauan berkala, jaga aerasi dan beban pakan."
-          : finalStatus === "Waspada"
-            ? "Waspada; optimalkan aerasi/sirkulasi, kurangi pakan sementara, cek pH/salinitas harian."
-            : "Risiko tinggi; maksimalkan aerasi, kurangi pakan, gunakan buffering pH/salinitas yang aman.";
-      content = `${numbersLine} Status ${finalStatus}. ${saran}`;
+    // fallback deterministik
+    if (!content) {
+      content = clipWords(hints, 30, 40);
     }
 
-    const fcStats = {
-      Suhu: stS, PH: stP, Salinitas: stSa, Kekeruhan: stT
-    };
-
-    const debug = wantDebug ? {
-      source,
-      used_window_days: days,
-      forecast_len_total: fcEff.length,
-      forecast_len_future: fwd.length,
-      computed: { finalStatus },
-      meta
-    } : undefined;
+    const debug = wantDebug
+      ? {
+        source,
+        used_window_days: days,
+        date_range: { from: startTs, to: endTs },
+        wqi_overall: wqiOverall,
+        wqi_stats: stW,
+        param_stats: { PH: stP, Suhu: stS, Salinitas: stSa, Kekeruhan: stT },
+      }
+      : undefined;
 
     return res.json({
-      status: finalStatus,
-      condition_text: content,              // ← dari forecast, bukan sensor_last
+      status: wqiOverall,                // label utama mengikuti WQI
+      condition_text: content,          // 30–40 kata, TANPA prefix tanggal
       numbers: {
         forecast_window_days: days,
-        minmax_p50: fcStats,               // ← MIN–MAX p50 di jendela
+        date_range: { from: startTs, to: endTs }, // agar FE bisa bikin prefix tanggal sendiri
+        wqi: stW,
+        minmax_p50: { Suhu: stS, PH: stP, Salinitas: stSa, Kekeruhan: stT },
       },
       used: { from: source, ranges: SAFE_RANGE, meta },
-      ...(wantDebug ? { debug } : {})
+      ...(wantDebug ? { debug } : {}),
     });
   } catch (e) {
     const code = e?.status || 500;

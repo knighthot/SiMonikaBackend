@@ -6,7 +6,7 @@ import { requireAuth } from "../middleware/auth.js";
 import { forceQueryOwnTambak, forceBodyOwnTambak } from "../middleware/scope.js";
 
 const r = Router();
-
+r.get("/latest", c.getLatestHistory);
 r.get("/", requireAuth, forceQueryOwnTambak, c.list);
 r.get("/:id", requireAuth, c.getById);
 r.post("/", requireAuth, forceBodyOwnTambak, validate(createHistoryPeramalanSchema), c.create);
